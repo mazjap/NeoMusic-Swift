@@ -19,7 +19,6 @@
 		0EB94A452463961700BC6717 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB94A442463961700BC6717 /* Assets.xcassets */; };
 		0EB94A482463961700BC6717 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EB94A462463961700BC6717 /* LaunchScreen.storyboard */; };
 		0EB94A502463965500BC6717 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB94A4F2463965500BC6717 /* Color+Extension.swift */; };
-		0EF9113C24788B3500777358 /* MusicSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9113B24788B3500777358 /* MusicSlider.swift */; };
 		0EF9113E2478903200777358 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9113D2478903200777358 /* TimeInterval+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +37,6 @@
 		0EB94A472463961700BC6717 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EB94A492463961700BC6717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0EB94A4F2463965500BC6717 /* Color+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		0EF9113B24788B3500777358 /* MusicSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSlider.swift; sourceTree = "<group>"; };
 		0EF9113D2478903200777358 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				0E7803D3246C369500EDC824 /* DefaultButton.swift */,
-				0EF9113B24788B3500777358 /* MusicSlider.swift */,
 				0E6A7CE82478B1EA000C5BC7 /* SongImageView.swift */,
 			);
 			path = Views;
@@ -218,7 +215,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EF9113C24788B3500777358 /* MusicSlider.swift in Sources */,
 				0E6A7CE92478B1EA000C5BC7 /* SongImageView.swift in Sources */,
 				0E7803D8246C443400EDC824 /* Song.swift in Sources */,
 				0E7803D4246C369500EDC824 /* DefaultButton.swift in Sources */,

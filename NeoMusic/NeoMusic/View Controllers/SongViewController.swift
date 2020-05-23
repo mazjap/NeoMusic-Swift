@@ -9,9 +9,14 @@
 import UIKit
 import MediaPlayer
 
+protocol JigglerDelegate {
+    var jiggler: UIImpactFeedbackGenerator? { get set }
+    func tap()
+}
+
 class SongViewController: UIViewController {
     // MARK: - Variables
-    var jiggler = UINotificationFeedbackGenerator()
+    var jiggler = UIImpactFeedbackGenerator(style: .heavy)
     var timer: Timer?
     var musicPlayer: MusicPlayer? = MusicPlayer()
     var currentSong: Song? {
@@ -53,12 +58,20 @@ class SongViewController: UIViewController {
     private func setup() {
         artworkImageView.isUserInteractionEnabled = true
         artworkImageView.isMultipleTouchEnabled = true
+        artworkImageView.jiggler = jiggler
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
         gradientLayer.frame = self.view.bounds
 
         view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        listButton.vc = self
+        backButton.vc = self
+        skipBackButton.vc = self
+        skipForwardButton.vc = self
+        pausePlayButton.vc = self
+        artworkImageView.vc = self
         
         timeSlider.minimumValue = 0
     }
@@ -83,7 +96,7 @@ class SongViewController: UIViewController {
     }
     
     private func tap() {
-        jiggler.notificationOccurred(.success)
+        jiggler.impactOccurred()
     }
     
     @objc
@@ -93,7 +106,7 @@ class SongViewController: UIViewController {
     
     // MARK: - IBActions
     
-    @IBAction func playPause(_ sender: UIButton) {
+    @IBAction func playPause(_ sender: DefaultButton) {
         tap()
         guard let musicPlayer = musicPlayer else { return }
         musicPlayer.toggle()
@@ -106,12 +119,12 @@ class SongViewController: UIViewController {
         }
     }
     
-    @IBAction func skipBack(_ sender: UIButton) {
+    @IBAction func skipBack(_ sender: DefaultButton) {
         tap()
         musicPlayer?.skipBack()
     }
     
-    @IBAction func skipForward(_ sender: UIButton) {
+    @IBAction func skipForward(_ sender: DefaultButton) {
         tap()
         musicPlayer?.skipForward()
     }
