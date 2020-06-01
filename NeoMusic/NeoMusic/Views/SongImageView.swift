@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SongImageView: DefaultView, JigglerDelegate {
+class SongImageView: DefaultView {
     var jiggler: UIImpactFeedbackGenerator?
     var lastRotation: CGFloat = 0
     var imageView = UIImageView()

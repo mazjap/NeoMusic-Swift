@@ -8,11 +8,6 @@
 
 import UIKit
 
-protocol JigglerDelegate {
-    var jiggler: UIImpactFeedbackGenerator? { get set }
-    func tap()
-}
-
 class SongViewController: UIViewController {
     // MARK: - Variables
     var jiggler = UIImpactFeedbackGenerator(style: .heavy)
