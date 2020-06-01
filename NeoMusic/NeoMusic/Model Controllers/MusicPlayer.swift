@@ -9,8 +9,7 @@
 import Foundation
 import MediaPlayer
 
-protocol MusicPlayerDelegate: class {
-    var musicPlayer: MusicPlayer? { get set }
+protocol MusicPlayerDelegate: AnyObject {
     func songUpdated(song: Song)
     func currentTimeUpdated(time: String)
     func playerStatusUpdated(isPlaying: Bool)
@@ -20,6 +19,7 @@ protocol MusicPlayerDelegate: class {
 class MusicPlayer: NSObject {
     weak var delegate: MusicPlayerDelegate?
     var queue = Queue<Song>()
+    var lyricsController: LyricsController?
     
     @objc let player = MPMusicPlayerController.applicationMusicPlayer
     
@@ -33,6 +33,16 @@ class MusicPlayer: NSObject {
     
     override init() {
         super.init()
+        let songsArr = getSongs()
+        lyricsController = LyricsController(songs: songsArr)
+        lyricsController?.getLyrics(for: Song(song: songsArr[0]), completion: { result in
+            switch result {
+            case .success(let lyric):
+                print(lyric)
+            case .failure(let error):
+                print(error)
+            }
+        })
         NotificationCenter.default.addObserver(self, selector: #selector(songChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: self.player)
         NotificationCenter.default.addObserver(self, selector: #selector(stateChanged), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: self.player)
         

@@ -15,6 +15,7 @@ struct Song {
     let title: String?
     let duration: TimeInterval
     let media: MPMediaItem
+    var lyrics: String?
     
     init(song: MPMediaItem) {
         artist = song.artist
