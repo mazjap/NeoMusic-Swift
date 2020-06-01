@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MediaPlayer
 
 protocol JigglerDelegate {
     var jiggler: UIImpactFeedbackGenerator? { get set }
@@ -66,26 +65,21 @@ class SongViewController: UIViewController {
 
         view.layer.insertSublayer(gradientLayer, at: 0)
         
-        listButton.vc = self
-        backButton.vc = self
-        skipBackButton.vc = self
-        skipForwardButton.vc = self
-        pausePlayButton.vc = self
-        artworkImageView.vc = self
-        
         timeSlider.minimumValue = 0
+        
+        setupButtons()
     }
     
     private func updateViews() {
         if let song = currentSong, let musicPlayer = musicPlayer {
-            artworkImageView.image = song.artwork
+            artworkImageView.setImage(song.artwork)
             totalTimeLabel.text = song.duration.stringTime
             artistNameLabel.text = song.artist
             songNameLabel.text = song.title
             timeSlider.maximumValue = Float(song.duration)
             currentTimeLabel.text = musicPlayer.currentTime.stringTime
         } else {
-            
+            // TODO: - Add no songs found state
         }
     }
     
@@ -99,35 +93,43 @@ class SongViewController: UIViewController {
         jiggler.impactOccurred()
     }
     
+    private func setupButtons() {
+        backButton.action = {} // TODO: - Add actions
+        
+        listButton.action = {} // "                 "
+        
+        skipBackButton.action = {
+            self.tap()
+            self.musicPlayer?.skipBack()
+        }
+        
+        skipForwardButton.action = {
+            self.tap()
+            self.musicPlayer?.skipForward()
+        }
+        
+        pausePlayButton.action = {
+            self.tap()
+            guard let musicPlayer = self.musicPlayer else { return }
+            musicPlayer.toggle()
+            
+            if musicPlayer.isPlaying {
+                self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.timerFired), userInfo: nil, repeats: true)
+            } else {
+                self.timer?.invalidate()
+                self.timer = nil
+            }
+        }
+    }
+    
+    // MARK: - Objective-C Functions
+    
     @objc
     private func timerFired() {
         updateTime()
     }
     
     // MARK: - IBActions
-    
-    @IBAction func playPause(_ sender: DefaultButton) {
-        tap()
-        guard let musicPlayer = musicPlayer else { return }
-        musicPlayer.toggle()
-        
-        if musicPlayer.isPlaying {
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerFired), userInfo: nil, repeats: true)
-        } else {
-            timer?.invalidate()
-            timer = nil
-        }
-    }
-    
-    @IBAction func skipBack(_ sender: DefaultButton) {
-        tap()
-        musicPlayer?.skipBack()
-    }
-    
-    @IBAction func skipForward(_ sender: DefaultButton) {
-        tap()
-        musicPlayer?.skipForward()
-    }
     
     @IBAction func sliderChanged(_ sender: UISlider) {
         guard let time = TimeInterval(exactly: sender.value) else { return }
@@ -140,7 +142,11 @@ class SongViewController: UIViewController {
 
 extension SongViewController: MusicPlayerDelegate {
     func playerStatusUpdated(isPlaying: Bool) {
-        pausePlayButton.setImage(UIImage(systemName: isPlaying ? "pause.fill" : "play.fill"), for: .normal)
+        if isPlaying {
+            pausePlayButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            pausePlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
     }
     
     func songUpdated(song: Song) {

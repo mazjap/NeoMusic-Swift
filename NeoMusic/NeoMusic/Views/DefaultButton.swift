@@ -8,52 +8,62 @@
 
 import UIKit
 
-class DefaultButton: UIButton {
-    var shadowView = UIView()
-    var ringView = UIView()
-    var vc: SongViewController? {
+class DefaultButton: DefaultView {
+    @IBInspectable var imageName: String = "" {
         didSet {
-            layoutSubviews()
+            button.setImage(UIImage(systemName: imageName), for: .normal)
         }
     }
     
+    let button = UIButton()
+    let buttonBackgroundGrad = CAGradientLayer()
+    var action: () -> Void = {}
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
-        tintColor = .buttonColor
+        button.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
+    }
+
+    override func updateViews() {
+        super.updateViews()
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(performAction(_:)))
+        tap.numberOfTapsRequired = 1
+        addGestureRecognizer(tap)
+        button.addGestureRecognizer(tap)
         
-        if let vc = vc {
-            let backgroundGradient = CAGradientLayer()
-            backgroundGradient.colors = [UIColor.bottomGradientColor.cgColor, UIColor.topGradientColor.cgColor]
-            backgroundGradient.frame = bounds
-            backgroundGradient.cornerRadius = frame.height / 2
-            layer.cornerRadius = frame.height / 2
-            
-            layer.insertSublayer(backgroundGradient, at: 0)
-            
-//            let change: Double = 0.125
-            vc.view.insertSubview(ringView, at: 1)
-            let newFrame = CGRect(x: frame.minX - (frame.width * 0.125 / 2), y: frame.minY - (frame.height * 0.125 / 2), width: frame.width + (frame.width * 0.125), height: frame.height + (frame.height * 0.125))
-            let ringBackgroundGrad = CAGradientLayer()
-            ringBackgroundGrad.colors = backgroundGradient.colors?.reversed()
-            ringBackgroundGrad.frame = newFrame
-            ringBackgroundGrad.cornerRadius = newFrame.height / 2
-            ringView.layer.insertSublayer(ringBackgroundGrad, at: 0)
-            ringView.backgroundColor = .clear
-            
-            vc.view.insertSubview(shadowView, at: 1)
-            layer.shadowOpacity = 0.2
-            layer.shadowColor = UIColor.white.cgColor
-            layer.shadowOffset = CGSize(width: -frame.height / 15, height: -frame.height / 15)
-            layer.shadowRadius = 14
-            
-            shadowView.frame = frame
-            shadowView.backgroundColor = .red
-            shadowView.layer.cornerRadius = frame.height / 2
-            shadowView.layer.shadowOpacity = 0.3
-            shadowView.layer.shadowColor = UIColor.black.cgColor
-            shadowView.layer.shadowOffset = CGSize(width: frame.height / 15, height: frame.height / 15)
-            shadowView.layer.shadowRadius = 14
+        button.frame = secondaryFrame
+        insertSubview(button, aboveSubview: self)
+        updateGradient()
+    }
+    
+    override func setupGradient() {
+        button.layer.insertSublayer(buttonBackgroundGrad, at: 0)
+        
+        super.setupGradient()
+        
+        if let imageView = button.imageView {
+            button.bringSubviewToFront(imageView)
         }
+        
+        button.backgroundColor = .clear
+    }
+    
+    override func updateGradient() {
+        super.updateGradient()
+        
+        buttonBackgroundGrad.colors = colors.reversed()
+        buttonBackgroundGrad.frame = button.bounds
+        buttonBackgroundGrad.cornerRadius = buttonBackgroundGrad.bounds.height / 2
+    }
+
+
+    func setImage(_ image: UIImage?, for state: UIControl.State) {
+        button.setImage(image, for: .normal)
+    }
+
+    @objc
+    func performAction(_ sender: UITapGestureRecognizer) {
+        action()
     }
 }
