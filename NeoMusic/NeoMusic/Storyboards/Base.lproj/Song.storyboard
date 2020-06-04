@@ -39,30 +39,13 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="line.horizontal.3"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-E2-QOa" customClass="SongImageView" customModule="NeoMusic" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-E2-QOa" customClass="DefaultImageView" customModule="NeoMusic" customModuleProvider="target">
                                 <rect key="frame" x="40" y="93.666666666666686" width="334" height="334"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Abb-E2-QOa" secondAttribute="height" multiplier="1:1" id="v1c-dR-mMe"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1FF-fg-HsK">
-                                <rect key="frame" x="40" y="443.66666666666669" width="334" height="59"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVv-5C-F6t">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="33.666666666666664"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lth-PU-XO1">
-                                        <rect key="frame" x="0.0" y="38.666666666666629" width="334" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="caz-8Q-UXp">
                                 <rect key="frame" x="40" y="518.66666666666663" width="334" height="50.333333333333371"/>
                                 <subviews>
@@ -83,12 +66,9 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="X66-ra-lTY">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="X66-ra-lTY" customClass="DefaultSlider" customModule="NeoMusic" customModuleProvider="target">
                                         <rect key="frame" x="-2" y="20.333333333333371" width="338" height="31"/>
                                         <color key="tintColor" name="TrackYellow"/>
-                                        <connections>
-                                            <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="UhW-as-VFR"/>
-                                        </connections>
                                     </slider>
                                 </subviews>
                             </stackView>
@@ -113,38 +93,61 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="forward.fill"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lth-PU-XO1">
+                                <rect key="frame" x="40" y="482.33333333333331" width="334" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVv-5C-F6t">
+                                <rect key="frame" x="136.66666666666669" y="443.66666666666669" width="140.66666666666669" height="33.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="e.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NYf-No-J1y">
+                                <rect key="frame" x="285.33333333333331" y="452" width="20.333333333333314" height="17.333333333333314"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="NYf-No-J1y" secondAttribute="height" multiplier="1:1" id="R6k-NL-AF0"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="ACx-fY-3JT" firstAttribute="centerY" secondItem="Kpt-vI-4vM" secondAttribute="centerY" id="2gd-O0-158"/>
-                            <constraint firstItem="1FF-fg-HsK" firstAttribute="leading" secondItem="caz-8Q-UXp" secondAttribute="leading" id="4eM-Kk-bGB"/>
+                            <constraint firstItem="nVv-5C-F6t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3hI-H0-13W"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dLH-Nt-dWl" secondAttribute="trailing" constant="20" id="76q-L4-ahS"/>
                             <constraint firstItem="dLH-Nt-dWl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="7H5-G9-0dX"/>
                             <constraint firstItem="dLH-Nt-dWl" firstAttribute="width" secondItem="dLH-Nt-dWl" secondAttribute="height" multiplier="1:1" id="825-u8-UBJ"/>
+                            <constraint firstItem="NYf-No-J1y" firstAttribute="leading" secondItem="nVv-5C-F6t" secondAttribute="trailing" constant="8" id="8Aa-Dx-SRx"/>
                             <constraint firstItem="DuC-By-gfC" firstAttribute="leading" secondItem="Kpt-vI-4vM" secondAttribute="trailing" constant="32" id="EgC-g8-3wM"/>
                             <constraint firstItem="2gh-XZ-IfP" firstAttribute="centerY" secondItem="gsW-T0-E7w" secondAttribute="centerY" id="Eq2-K5-l5v"/>
+                            <constraint firstItem="lth-PU-XO1" firstAttribute="trailing" secondItem="X66-ra-lTY" secondAttribute="trailing" id="HWT-Qs-3sy"/>
+                            <constraint firstItem="NYf-No-J1y" firstAttribute="centerY" secondItem="nVv-5C-F6t" secondAttribute="centerY" id="J8q-MR-Epl"/>
                             <constraint firstItem="DuC-By-gfC" firstAttribute="width" secondItem="Kpt-vI-4vM" secondAttribute="width" multiplier="0.95" id="Lfb-mf-Cbd"/>
                             <constraint firstItem="Kpt-vI-4vM" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.2" id="NHS-Ic-lvL"/>
                             <constraint firstItem="gsW-T0-E7w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="P6v-zQ-QTh"/>
-                            <constraint firstItem="caz-8Q-UXp" firstAttribute="top" secondItem="1FF-fg-HsK" secondAttribute="bottom" constant="16" id="PWH-3r-ukU"/>
+                            <constraint firstItem="nVv-5C-F6t" firstAttribute="top" secondItem="Abb-E2-QOa" secondAttribute="bottom" constant="16" id="PRC-Nz-E7X"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Kpt-vI-4vM" secondAttribute="bottom" constant="20" id="PoU-zb-NM6"/>
                             <constraint firstItem="gsW-T0-E7w" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="R87-8D-rim"/>
-                            <constraint firstItem="1FF-fg-HsK" firstAttribute="trailing" secondItem="caz-8Q-UXp" secondAttribute="trailing" id="Twi-Ow-Kr8"/>
                             <constraint firstItem="Kpt-vI-4vM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UPk-bY-B8L"/>
+                            <constraint firstItem="lth-PU-XO1" firstAttribute="top" secondItem="nVv-5C-F6t" secondAttribute="bottom" constant="5" id="Vjy-so-I8W"/>
                             <constraint firstItem="2gh-XZ-IfP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WBS-L6-w7y"/>
+                            <constraint firstItem="caz-8Q-UXp" firstAttribute="top" secondItem="lth-PU-XO1" secondAttribute="bottom" constant="16" id="YYo-23-Y0M"/>
                             <constraint firstItem="ACx-fY-3JT" firstAttribute="width" secondItem="ACx-fY-3JT" secondAttribute="height" multiplier="1:1" id="ZKL-1c-LQc"/>
                             <constraint firstItem="Abb-E2-QOa" firstAttribute="leading" secondItem="caz-8Q-UXp" secondAttribute="leading" id="ZVL-YE-WgN"/>
                             <constraint firstItem="Abb-E2-QOa" firstAttribute="top" secondItem="gsW-T0-E7w" secondAttribute="bottom" constant="20" id="e3c-YA-2wA"/>
-                            <constraint firstItem="1FF-fg-HsK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eeu-PO-Lj0"/>
                             <constraint firstItem="DuC-By-gfC" firstAttribute="width" secondItem="DuC-By-gfC" secondAttribute="height" multiplier="1:1" id="gaB-Ui-US6"/>
-                            <constraint firstItem="1FF-fg-HsK" firstAttribute="top" secondItem="Abb-E2-QOa" secondAttribute="bottom" constant="16" id="gao-y6-9p4"/>
                             <constraint firstItem="Abb-E2-QOa" firstAttribute="trailing" secondItem="caz-8Q-UXp" secondAttribute="trailing" id="jf8-71-Hp2"/>
                             <constraint firstItem="ACx-fY-3JT" firstAttribute="width" secondItem="Kpt-vI-4vM" secondAttribute="width" multiplier="0.95" id="kaX-Q3-6fl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Abb-E2-QOa" secondAttribute="trailing" constant="40" id="kdn-r8-vhT"/>
                             <constraint firstItem="Abb-E2-QOa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="ope-Qt-qgB"/>
                             <constraint firstItem="Kpt-vI-4vM" firstAttribute="width" secondItem="Kpt-vI-4vM" secondAttribute="height" multiplier="1:1" id="ovJ-Yb-IdM"/>
                             <constraint firstItem="dLH-Nt-dWl" firstAttribute="width" secondItem="gsW-T0-E7w" secondAttribute="width" id="q3q-2v-qE0"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="nVv-5C-F6t" secondAttribute="trailing" constant="20" id="qHi-0s-w8W"/>
                             <constraint firstItem="Kpt-vI-4vM" firstAttribute="leading" secondItem="ACx-fY-3JT" secondAttribute="trailing" constant="32" id="rbF-qU-Kdm"/>
+                            <constraint firstItem="nVv-5C-F6t" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="vyg-Xz-dO1"/>
+                            <constraint firstItem="lth-PU-XO1" firstAttribute="leading" secondItem="X66-ra-lTY" secondAttribute="leading" id="wOJ-xD-72r"/>
                             <constraint firstItem="DuC-By-gfC" firstAttribute="centerY" secondItem="Kpt-vI-4vM" secondAttribute="centerY" id="yFK-uQ-BCD"/>
                             <constraint firstItem="gsW-T0-E7w" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.13" id="znV-B4-uRI"/>
                         </constraints>
@@ -155,6 +158,7 @@
                         <outlet property="artworkImageView" destination="Abb-E2-QOa" id="4oE-BP-q0W"/>
                         <outlet property="backButton" destination="gsW-T0-E7w" id="cY4-69-UOk"/>
                         <outlet property="currentTimeLabel" destination="NaP-QO-whJ" id="fKl-36-a0Y"/>
+                        <outlet property="explicitImage" destination="NYf-No-J1y" id="vJo-vc-HFm"/>
                         <outlet property="listButton" destination="dLH-Nt-dWl" id="fjZ-WA-JzL"/>
                         <outlet property="nowPlayingLabel" destination="2gh-XZ-IfP" id="lXX-zz-k8O"/>
                         <outlet property="pausePlayButton" destination="Kpt-vI-4vM" id="r2x-RH-6Na"/>
@@ -171,6 +175,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="e.square.fill" catalog="system" width="128" height="114"/>
         <namedColor name="TrackYellow">
             <color red="0.9179999828338623" green="0.72500002384185791" blue="0.1289999932050705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

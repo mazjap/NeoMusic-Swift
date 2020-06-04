@@ -16,12 +16,14 @@ struct Song {
     let duration: TimeInterval
     let media: MPMediaItem
     var lyrics: String?
+    var isExplicit: Bool
     
     init(song: MPMediaItem) {
         artist = song.artist
         artwork = song.artwork?.image(at: CGSize(width: 500, height: 500))
         title = song.title
         duration = song.playbackDuration
+        isExplicit = song.isExplicitItem
         media = song
     }
 }

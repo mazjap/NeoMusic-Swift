@@ -10,21 +10,27 @@ import Foundation
 import MediaPlayer
 
 protocol MusicPlayerDelegate: AnyObject {
-    func songUpdated(song: Song)
-    func currentTimeUpdated(time: String)
+    func songUpdated(song: Song?)
     func playerStatusUpdated(isPlaying: Bool)
 }
 
-@objc
+
 class MusicPlayer: NSObject {
     weak var delegate: MusicPlayerDelegate?
     var queue = Queue<Song>()
     var lyricsController: LyricsController?
     
-    @objc let player = MPMusicPlayerController.applicationMusicPlayer
+    let player = MPMusicPlayerController.applicationMusicPlayer
     
-    var song: MPMediaItem? {
+    var songMedia: MPMediaItem? {
         self.player.nowPlayingItem
+    }
+    
+    var song: Song? {
+        if let media = songMedia {
+            return Song(song: media)
+        }
+        return nil
     }
     
     var isPlaying: Bool {
@@ -35,12 +41,12 @@ class MusicPlayer: NSObject {
         super.init()
         let songsArr = getSongs()
         lyricsController = LyricsController(songs: songsArr)
-        lyricsController?.getLyrics(for: Song(song: songsArr[0]), completion: { result in
+        lyricsController?.getLyrics(for: Song(song: songsArr.first ?? MPMediaItem()), completion: { result in
             switch result {
             case .success(let lyric):
                 print(lyric)
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                print("error")
             }
         })
         NotificationCenter.default.addObserver(self, selector: #selector(songChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: self.player)
@@ -100,18 +106,24 @@ class MusicPlayer: NSObject {
     
     @objc
     func songChanged() {
-        if let media = player.nowPlayingItem, let delegate = delegate {
-            let song = Song(song: media)
+        if let delegate = delegate {
+            let song: Song?
+            if let media = player.nowPlayingItem {
+                song = Song(song: media)
+            } else {
+                song = nil
+            }
+            
             delegate.songUpdated(song: song)
         }
     }
     
-    @objc
-    func updateTime() {
-        if let delegate = delegate {
-            delegate.currentTimeUpdated(time: player.currentPlaybackTime.stringTime)
-        }
-    }
+//    @objc
+//    func updateTime() {
+//        if let delegate = delegate {
+//            delegate.currentTimeUpdated(time: player.currentPlaybackTime.stringTime)
+//        }
+//    }
     
     @objc
     func stateChanged() {

@@ -32,7 +32,7 @@ class DefaultButton: DefaultView {
         addGestureRecognizer(tap)
         button.addGestureRecognizer(tap)
         
-        button.frame = secondaryFrame
+        button.frame = secondaryFrame.changeSize(mult: 0.9)
         insertSubview(button, aboveSubview: self)
         updateGradient()
     }

@@ -18,17 +18,20 @@ class DefaultView: UIView {
         }
     }
     
+    var startPoint = CGPoint()
+    var endPoint = CGPoint()
+    
     override init(frame: CGRect) {
         secondaryFrame = CGRect()
         super.init(frame: frame)
-        secondaryFrame = CGRect(center: bounds.center, size: bounds.size(multiplier: 0.95))
+
         updateViews()
     }
     
     required init?(coder: NSCoder) {
         secondaryFrame = CGRect()
         super.init(coder: coder)
-        secondaryFrame = CGRect(center: bounds.center, size: bounds.size(multiplier: 0.95))
+        
         updateViews()
     }
     
@@ -49,6 +52,8 @@ class DefaultView: UIView {
         backgroundGradient.colors = colors
         backgroundGradient.frame = bounds
         backgroundGradient.cornerRadius = frame.height / 2
+        backgroundGradient.startPoint = startPoint
+        backgroundGradient.endPoint = endPoint
     }
     
     internal func setupShadows() {
@@ -66,9 +71,21 @@ class DefaultView: UIView {
         shadowView.layer.shadowRadius = 14
     }
     
+    internal func updateColors() {
+        updateGradient()
+    }
+    
     internal func updateViews() {
+        secondaryFrame = CGRect(center: bounds.center, size: bounds.size(multiplier: 0.95))
+        startPoint = CGPoint(x: bounds.minX, y: bounds.minY)
+        endPoint = CGPoint(x: bounds.maxX, y: bounds.maxY)
+        
         setupGradient()
         setupShadows()
         backgroundColor = .clear
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        updateColors()
     }
 }

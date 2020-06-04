@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SongImageView: DefaultView {
+class DefaultImageView: DefaultView {
     var jiggler: UIImpactFeedbackGenerator?
     var lastRotation: CGFloat = 0
     var imageView = UIImageView()
@@ -19,9 +19,8 @@ class SongImageView: DefaultView {
 
     override func updateViews() {
         super.updateViews()
-        
-        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation(sender:)))
-        addGestureRecognizer(rotateGesture)
+        imageView.isUserInteractionEnabled = true
+        imageView.isMultipleTouchEnabled = true
         
 //        let rotationGesture = UITapGestureRecognizer(target: self, action: #selector(handlingRotation(sender:)))
 //        rotationGesture.numberOfTapsRequired = 1
@@ -31,6 +30,9 @@ class SongImageView: DefaultView {
         imageView.frame = secondaryFrame
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = frame.height / 2 - frame.height * 0.025
+        
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation(sender:)))
+        imageView.addGestureRecognizer(rotateGesture)
         
     }
     
