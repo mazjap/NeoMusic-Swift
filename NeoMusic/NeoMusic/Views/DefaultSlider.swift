@@ -14,9 +14,14 @@ protocol DefaultSliderDelegate: AnyObject {
 }
 
 class DefaultSlider: UISlider {
+    
+    // MARK: - Variables
+    
     weak var delegate: DefaultSliderDelegate?
     var timer: Timer?
     var isEditing = false
+    
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,17 +34,23 @@ class DefaultSlider: UISlider {
         
         updateViews()
     }
+    
+    // MARK: - Superclass Functions
 
     override func layoutSubviews() {
         super.layoutSubviews()
         tintColor = .trackYellowColor
     }
     
-    internal func updateViews() {
+    // MARK: - Private Functions
+    
+    private func updateViews() {
         addTarget(self, action: #selector(sliderEditing), for: .editingDidEnd)
         addTarget(self, action: #selector(sliderReleased), for: .touchUpInside)
         
     }
+    
+    // MARK: - Objective-C Functions
     
     @objc
     private func sliderEditing() {

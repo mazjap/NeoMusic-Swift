@@ -9,9 +9,27 @@
 import UIKit
 
 class DefaultImageView: DefaultView {
+    
+    // MARK: - Variables
+    
+    private let rotateAnimation = CABasicAnimation()
+    private var rotation: CGFloat = 0
+    private var totalRotation: CGFloat = 0
+    private var prevRotation: CGFloat = 0
+    private var startRotationAngle: CGFloat = 0
+    private var imageView = UIImageView()
+    
     var jiggler: UIImpactFeedbackGenerator?
-    var lastRotation: CGFloat = 0
-    var imageView = UIImageView()
+    
+    // MARK: - Initializers
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        updateViews()
+    }
+    
+    // MARK: - Superclass Functions
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -19,55 +37,92 @@ class DefaultImageView: DefaultView {
 
     override func updateViews() {
         super.updateViews()
+        
+        secondaryFrame = CGRect(center: bounds.center, size: bounds.size(multiplier: 0.96))
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true
+        imageView.contentMode = .scaleAspectFill
         
-//        let rotationGesture = UITapGestureRecognizer(target: self, action: #selector(handlingRotation(sender:)))
-//        rotationGesture.numberOfTapsRequired = 1
-//        addGestureRecognizer(rotationGesture)
+        let rotationGesture = UIPanGestureRecognizer(target: self, action: #selector(handleRotation(sender:)))
+        imageView.addGestureRecognizer(rotationGesture)
         
         insertSubview(imageView, aboveSubview: self)
         imageView.frame = secondaryFrame
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = frame.height / 2 - frame.height * 0.025
-        
-        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation(sender:)))
-        imageView.addGestureRecognizer(rotateGesture)
-        
     }
     
-    func tap() {
-        guard let jiggler = jiggler else { return }
-        jiggler.impactOccurred()
-    }
+    // MARK: - Functions
     
     func setImage(_ image: UIImage?) {
         imageView.image = image
     }
-
-    @objc
-    private func handleRotation(sender: UIRotationGestureRecognizer) {
-        guard let senderView = sender.view else { return }
-        if sender.state == .began || sender.state == .changed {
-            senderView.transform = senderView.transform.rotated(by: sender.rotation)
-            lastRotation = sender.rotation
-            sender.rotation = 0
-        } else if sender.state == .ended {
-            tap()
+    
+    // MARK: - Private Functions
+    
+    private func tap() {
+        guard let jiggler = jiggler else { return }
+        jiggler.impactOccurred()
+    }
+    
+    private func rotate(to: CGFloat, duration: Double = 0) {
+        rotateAnimation.fromValue = to
+        rotateAnimation.toValue = to
+        rotateAnimation.duration = duration
+        rotateAnimation.repeatCount = 0
+        rotateAnimation.isRemovedOnCompletion = false
+        rotateAnimation.fillMode = CAMediaTimingFillMode.forwards
+        rotateAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        imageView.layer.add(rotateAnimation, forKey: "transform.rotation.z")
+    }
+    
+    private func angle(from location: CGPoint) -> CGFloat {
+        let deltaY = location.y - imageView.center.y
+        let deltaX = location.x - imageView.center.x
+        let angle = atan2(deltaY, deltaX) * 180 / .pi
+        return angle < 0 ? abs(angle) : 360 - angle
+    }
+    
+    private func clipToAngle(gestureRotation: CGFloat) {
+        let num = evenOut(gestureRotation)
+        let distance: CGFloat = .pi / 10
+        if num > (.pi * 2) - distance || num < distance {
+            rotate(to: 0)
+            rotation = 0
         }
     }
+    
+    private func evenOut(_ val: CGFloat) -> CGFloat {
+        var rotation = val
+        if rotation > .pi * 2 {
+            rotation -= .pi * 2
+            return evenOut(rotation)
+        } else if rotation < 0 {
+            rotation += .pi * 2
+            return evenOut(rotation)
+        }
+        return rotation
+    }
+    
+    // MARK: - Objective-C Functions
 
-//    @objc
-//    private func handlingRotation(sender: UITapGestureRecognizer) {
-//        guard let senderView = sender.view as? SongImageView else { return }
-//        if sender.state == .began || sender.state == .changed {
-//            let p2 = senderView.center
-//            let p1 = CGPoint(x: p2.x, y: senderView.frame.height / 2)
-//            let p3 = sender.location(in: senderView)
-//            let degrees = CGFloat(atan2(p3.y - p1.y, p3.x - p1.x) - atan2(p2.y - p1.y, p2.x - p1.x))
-//
-//            senderView.transform = senderView.transform.rotated(by: degrees)
-//            lastRotation = degrees
-//        }
-//    }
+    @objc
+    private func handleRotation(sender: UIPanGestureRecognizer) {
+        let location = sender.location(in: imageView)
+        let gestureRotation = CGFloat(angle(from: location)) - startRotationAngle
+        
+        switch sender.state {
+        case .began:
+            startRotationAngle = angle(from: location)
+            tap()
+        case .changed:
+            rotate(to: rotation - gestureRotation.degreesToRadians)
+        case .ended:
+            rotation -= gestureRotation.degreesToRadians
+            clipToAngle(gestureRotation: rotation - gestureRotation.degreesToRadians)
+            tap()
+        default:
+            break
+        }
+    }
 }

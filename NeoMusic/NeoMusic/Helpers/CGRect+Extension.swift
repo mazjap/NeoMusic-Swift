@@ -29,6 +29,7 @@ extension CGRect {
     }
     
     func changeSize(mult: CGFloat = 1, const: CGFloat = 0) -> CGRect {
-        return CGRect(center: center, size: size(multiplier: mult))
+        let offset = 1 - ((height - const) / height)
+        return CGRect(center: center, size: size(multiplier: mult - offset))
     }
 }

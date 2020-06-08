@@ -27,6 +27,18 @@ struct Queue<Element> {
         return nil
     }
     
+    @discardableResult mutating func pop(amount num: Int) -> [Element] {
+        if storage.count >= num {
+            var popped = [Element]()
+            for i in 0..<num {
+                popped.append(storage.remove(at: i))
+            }
+            return popped
+        }
+        
+        return []
+    }
+    
     mutating func pushToFront(_ el: Element) {
         storage = [el] + storage
     }

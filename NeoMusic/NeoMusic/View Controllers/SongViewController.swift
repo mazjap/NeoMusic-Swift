@@ -13,6 +13,8 @@ class SongViewController: UIViewController {
 
     var jiggler = UIImpactFeedbackGenerator(style: .heavy)
     var musicPlayer: MusicPlayer?
+    let gradientLayer = CAGradientLayer()
+    var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
     var currentSong: Song? {
         didSet {
             updateViews()
@@ -39,7 +41,7 @@ class SongViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setup()
         timeSlider.isContinuous = false
     }
@@ -64,10 +66,7 @@ class SongViewController: UIViewController {
         artworkImageView.isMultipleTouchEnabled = true
         artworkImageView.jiggler = jiggler
         
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
-        gradientLayer.frame = self.view.bounds
-
+        updateGradient()
         view.layer.insertSublayer(gradientLayer, at: 0)
         
         timeSlider.delegate = self
@@ -78,23 +77,33 @@ class SongViewController: UIViewController {
         setupButtons()
     }
     
+    private func updateGradient() {
+        gradientLayer.colors = colors
+        gradientLayer.frame = self.view.bounds
+    }
+    
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        if let song = currentSong, let musicPlayer = musicPlayer {
+        updateGradient()
+        if let song = currentSong {
             artworkImageView.setImage(song.artwork)
             totalTimeLabel.text = song.duration.stringTime
             artistNameLabel.text = song.artist
             songNameLabel.text = song.title
             timeSlider.maximumValue = Float(song.duration)
-            currentTimeLabel.text = musicPlayer.currentTime.stringTime
             updateTime()
             explicitImage.isHidden = !song.isExplicit
         } else if let song = musicPlayer?.song {
             currentSong = song
         } else {
-            // TODO: - Add no songs found state
+            artworkImageView.setImage(UIImage(named: "Placeholder"))
             explicitImage.isHidden = true
+            totalTimeLabel.text = "0:00"
+            artistNameLabel.text = ""
+            songNameLabel.text = "No Song Selected"
+            timeSlider.maximumValue = 0.01
+            updateTime()
         }
     }
     
@@ -162,6 +171,12 @@ class SongViewController: UIViewController {
     @objc
     func songUpdated() {
         currentSong = musicPlayer?.song
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        updateGradient()
     }
 }
 
