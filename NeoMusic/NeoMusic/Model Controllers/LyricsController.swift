@@ -13,14 +13,6 @@ class LyricsController {
     let baseURL = URL(string: "https://api.musixmatch.com/ws/1.1/")!
     let cache = Cache<String, String>()
     
-    init(songs: [MPMediaItem]) {
-        for media in songs {
-            if let title = media.title, let lyrics = media.lyrics {
-                cache.store(value: lyrics, for: title)
-            }
-        }
-    }
-    
     func getLyrics(for song: Song, completion: @escaping (Result<String, Error>) -> Void) {
         guard let title = song.title else {
             completion(.failure(NSError()))

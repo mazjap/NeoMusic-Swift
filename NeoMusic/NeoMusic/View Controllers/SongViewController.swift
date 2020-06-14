@@ -12,7 +12,8 @@ class SongViewController: UIViewController {
     // MARK: - Variables
 
     var jiggler = UIImpactFeedbackGenerator(style: .heavy)
-    var musicPlayer: MusicPlayer?
+    var musicPlayer: AppleMusicPlayer?
+    var settingsController: SettingsController?
     let gradientLayer = CAGradientLayer()
     var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
     var currentSong: Song? {
@@ -44,12 +45,23 @@ class SongViewController: UIViewController {
         
         setup()
         timeSlider.isContinuous = false
+        
+        if let angle = settingsController?.imageAngle {
+            artworkImageView.setAngle(angle)
+            artworkImageView.rotation = angle
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         currentSong = musicPlayer?.song
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        settingsController?.setAngle(artworkImageView.rotation)
     }
     
     // MARK: - Private Functions
@@ -84,8 +96,7 @@ class SongViewController: UIViewController {
     
     private func updateViews() {
         guard isViewLoaded else { return }
-        
-        updateGradient()
+
         if let song = currentSong {
             artworkImageView.setImage(song.artwork)
             totalTimeLabel.text = song.duration.stringTime
@@ -103,7 +114,7 @@ class SongViewController: UIViewController {
             artistNameLabel.text = ""
             songNameLabel.text = "No Song Selected"
             timeSlider.maximumValue = 0.01
-            updateTime()
+            timeSlider.value = 0
         }
     }
     
@@ -184,12 +195,13 @@ class SongViewController: UIViewController {
 
 extension SongViewController: DefaultSliderDelegate {
     func timerFired() {
-        updateTime()
+        if currentSong != nil {
+            updateTime()
+        }
     }
     
     func sliderChanged(_ sender: UISlider) {
         guard let time = TimeInterval(exactly: sender.value) else { return }
         musicPlayer?.set(time: time)
-//        updateTime()
     }
 }
