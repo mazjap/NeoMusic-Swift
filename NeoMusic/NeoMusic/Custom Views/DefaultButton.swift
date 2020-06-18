@@ -26,7 +26,7 @@ class DefaultButton: DefaultView {
         }
     }
     
-    let button = EmbeddedButton()
+    let button = UIButton()
     let buttonBackgroundGrad = CAGradientLayer()
     var action: () -> Void = {}
     
@@ -35,39 +35,36 @@ class DefaultButton: DefaultView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        let newRect = rect.changeSize(const: 5)
-        if let context = UIGraphicsGetCurrentContext() {
-            _ = UIBezierPath(roundedRect: newRect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: newRect.height / 2, height: newRect.height / 2)).addClip()
-            let buttonGradientStartPoint = CGPoint(x: newRect.minX, y: newRect.minY)
-            let buttonGradientEndPoint = CGPoint(x: newRect.maxX, y: newRect.maxY)
-            
-            let colorSpace = CGColorSpaceCreateDeviceRGB()
-            let colorLocations: [CGFloat] = [0.0, 1.0]
-            
-            if let gradient = CGGradient(colorsSpace: colorSpace, colors: colors.reversed() as CFArray, locations: colorLocations) {
-                context.drawLinearGradient(gradient, start: buttonGradientStartPoint, end: buttonGradientEndPoint, options: [])
-            }
-        }
+        secondaryFrame = rect.changeSize(const: 5)
+        
+        guard let context = UIGraphicsGetCurrentContext(),
+            let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors.reversed() as CFArray, locations: [0.0, 1.0])
+            else { return }
+        
+        _ = UIBezierPath(roundedRect: secondaryFrame, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: secondaryFrame.width / 2, height: secondaryFrame.height / 2)).addClip()
+        
+        let buttonGradientStartPoint = CGPoint(x: secondaryFrame.minX, y: secondaryFrame.minY)
+        let buttonGradientEndPoint = CGPoint(x: secondaryFrame.maxX, y: secondaryFrame.maxY)
+        
+        context.drawLinearGradient(gradient, start: buttonGradientStartPoint, end: buttonGradientEndPoint, options: [])
+        
+        button.frame = secondaryFrame
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         button.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
     }
 
     override func updateViews() {
-        secondaryFrame = bounds.changeSize(const: 5)
-        
         super.updateViews()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(performAction(_:)))
         tap.numberOfTapsRequired = 1
-        addGestureRecognizer(tap)
         button.addGestureRecognizer(tap)
         
-        button.frame = secondaryFrame
         insertSubview(button, aboveSubview: self)
-        button.roundCorners()
     }
     
     override func setupGradient() {

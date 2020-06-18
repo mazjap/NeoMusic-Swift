@@ -45,8 +45,7 @@ class DefaultView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         // Create path to be drawn in (circle)
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: bounds.width / 2, height: bounds.height / 2))
-        path.addClip()
+        _ = UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: bounds.width / 2, height: bounds.height / 2)).addClip()
 
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.saveGState()
@@ -108,13 +107,14 @@ class DefaultView: UIView {
     }
     
     internal func updateViews() {
-        secondaryFrame = CGRect(center: bounds.center, size: bounds.size(multiplier: 0.95))
         startPoint = CGPoint(x: frame.minX, y: frame.maxY)
         endPoint = CGPoint(x: frame.maxX, y: frame.minY)
         
         setupGradient()
         setupShadows()
         backgroundColor = .clear
+        
+        secondaryFrame = bounds.changeSize(const: 5)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

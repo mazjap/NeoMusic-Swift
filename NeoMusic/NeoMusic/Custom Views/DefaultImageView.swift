@@ -30,6 +30,13 @@ class DefaultImageView: DefaultView {
     }
     
     // MARK: - Superclass Functions
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        imageView.frame = rect.changeSize(mult: 0.96)
+        imageView.layer.cornerRadius = frame.height / 2 - frame.height * 0.025
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -38,7 +45,6 @@ class DefaultImageView: DefaultView {
     override func updateViews() {
         super.updateViews()
         
-        secondaryFrame = CGRect(center: bounds.center, size: bounds.size(multiplier: 0.96))
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true
         imageView.contentMode = .scaleAspectFill
@@ -47,7 +53,7 @@ class DefaultImageView: DefaultView {
         imageView.addGestureRecognizer(rotationGesture)
         
         insertSubview(imageView, aboveSubview: self)
-        imageView.frame = secondaryFrame
+        imageView.frame = bounds.changeSize(mult: 0.96)
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = frame.height / 2 - frame.height * 0.025
     }
