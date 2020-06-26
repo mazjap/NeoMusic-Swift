@@ -19,6 +19,7 @@ protocol GenericMusicPlayer: AnyObject {
     var song: Song? { get }
     var isPlaying: Bool { get }
     var currentTime: TimeInterval { get }
+    var delegate: MusicPlayerDelegate? { get set }
     
     func getSongs(_ type: SongType, isShuffled: Bool) -> [Media]
     func pause()
@@ -27,5 +28,9 @@ protocol GenericMusicPlayer: AnyObject {
     func toggle()
     func skipBack()
     func skipForward()
-    
+}
+
+protocol MusicPlayerDelegate: AnyObject {
+    func songUpdated(song: Song?)
+    func playerStatusUpdated(isPlaying: Bool)
 }

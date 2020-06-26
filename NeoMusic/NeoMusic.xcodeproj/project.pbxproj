@@ -10,6 +10,7 @@
 		0E04933A2486D04600E66269 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0493392486D04600E66269 /* SettingsController.swift */; };
 		0E04935C24873CE900E66269 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0493462487379700E66269 /* SpotifyiOS.framework */; };
 		0E04AFEE249336FB0008843A /* EmbeddedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04AFED249336FB0008843A /* EmbeddedButton.swift */; };
+		0E2FF779249B0F5800B8B3DD /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FF778249B0F5800B8B3DD /* NowPlayingView.swift */; };
 		0E3007D02478E274006F0394 /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3007CF2478E274006F0394 /* LyricsController.swift */; };
 		0E3007D22478E36F006F0394 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3007D12478E36F006F0394 /* Cache.swift */; };
 		0E43E5FF2491D035001B08A6 /* GenericMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E43E5FE2491D035001B08A6 /* GenericMusicPlayer.swift */; };
@@ -19,12 +20,11 @@
 		0E7803D4246C369500EDC824 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7803D3246C369500EDC824 /* DefaultButton.swift */; };
 		0E7803D6246C421700EDC824 /* AppleMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7803D5246C421700EDC824 /* AppleMusicPlayer.swift */; };
 		0E7803D8246C443400EDC824 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7803D7246C443400EDC824 /* Song.swift */; };
+		0E80E5E324A192290086C479 /* NowPlayingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E80E5E224A192290086C479 /* NowPlayingView.xib */; };
 		0E91D996248DEA2800A3F6F1 /* FloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E91D995248DEA2700A3F6F1 /* FloatingPoint+Extension.swift */; };
 		0EAA087C2471F85500A0EC73 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA087B2471F85500A0EC73 /* Queue.swift */; };
 		0EB94A3C2463961100BC6717 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB94A3B2463961100BC6717 /* AppDelegate.swift */; };
 		0EB94A3E2463961100BC6717 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB94A3D2463961100BC6717 /* SceneDelegate.swift */; };
-		0EB94A402463961100BC6717 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB94A3F2463961100BC6717 /* SongViewController.swift */; };
-		0EB94A432463961100BC6717 /* Song.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EB94A412463961100BC6717 /* Song.storyboard */; };
 		0EB94A452463961700BC6717 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB94A442463961700BC6717 /* Assets.xcassets */; };
 		0EB94A482463961700BC6717 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EB94A462463961700BC6717 /* LaunchScreen.storyboard */; };
 		0EB94A502463965500BC6717 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB94A4F2463965500BC6717 /* UIColor+Extension.swift */; };
@@ -42,6 +42,7 @@
 		0E0493462487379700E66269 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		0E04935224873A7F00E66269 /* NeoMusic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NeoMusic-Bridging-Header.h"; sourceTree = "<group>"; };
 		0E04AFED249336FB0008843A /* EmbeddedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedButton.swift; sourceTree = "<group>"; };
+		0E2FF778249B0F5800B8B3DD /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
 		0E3007CF2478E274006F0394 /* LyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
 		0E3007D12478E36F006F0394 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		0E43E5FE2491D035001B08A6 /* GenericMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMusicPlayer.swift; sourceTree = "<group>"; };
@@ -51,13 +52,12 @@
 		0E7803D3246C369500EDC824 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		0E7803D5246C421700EDC824 /* AppleMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicPlayer.swift; sourceTree = "<group>"; };
 		0E7803D7246C443400EDC824 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		0E80E5E224A192290086C479 /* NowPlayingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NowPlayingView.xib; sourceTree = "<group>"; };
 		0E91D995248DEA2700A3F6F1 /* FloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extension.swift"; sourceTree = "<group>"; };
 		0EAA087B2471F85500A0EC73 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		0EB94A382463961100BC6717 /* NeoMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeoMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB94A3B2463961100BC6717 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EB94A3D2463961100BC6717 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0EB94A3F2463961100BC6717 /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
-		0EB94A422463961100BC6717 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Song.storyboard; sourceTree = "<group>"; };
 		0EB94A442463961700BC6717 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0EB94A472463961700BC6717 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EB94A492463961700BC6717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				0EF6EF58248643D4005BCA7F /* HomeViewController.swift */,
-				0EB94A3F2463961100BC6717 /* SongViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -145,6 +144,7 @@
 		0E104AF62478831200C1D0AF /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				0E2FF778249B0F5800B8B3DD /* NowPlayingView.swift */,
 				0E7803D3246C369500EDC824 /* DefaultButton.swift */,
 				0E6A7CE82478B1EA000C5BC7 /* DefaultImageView.swift */,
 				0EF6EF5024849635005BCA7F /* DefaultSlider.swift */,
@@ -160,8 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				0EF6EF5424864292005BCA7F /* Main.storyboard */,
-				0EB94A412463961100BC6717 /* Song.storyboard */,
 				0EB94A462463961700BC6717 /* LaunchScreen.storyboard */,
+				0E80E5E224A192290086C479 /* NowPlayingView.xib */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -269,8 +269,8 @@
 			files = (
 				0EB94A482463961700BC6717 /* LaunchScreen.storyboard in Resources */,
 				0EB94A452463961700BC6717 /* Assets.xcassets in Resources */,
-				0EB94A432463961100BC6717 /* Song.storyboard in Resources */,
 				0EF6EF5524864292005BCA7F /* Main.storyboard in Resources */,
+				0E80E5E324A192290086C479 /* NowPlayingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +288,6 @@
 				0E7803D8246C443400EDC824 /* Song.swift in Sources */,
 				0E04933A2486D04600E66269 /* SettingsController.swift in Sources */,
 				0E7803D4246C369500EDC824 /* DefaultButton.swift in Sources */,
-				0EB94A402463961100BC6717 /* SongViewController.swift in Sources */,
 				0EAA087C2471F85500A0EC73 /* Queue.swift in Sources */,
 				0E7803D6246C421700EDC824 /* AppleMusicPlayer.swift in Sources */,
 				0EB94A3C2463961100BC6717 /* AppDelegate.swift in Sources */,
@@ -299,6 +298,7 @@
 				0EF6EF59248643D4005BCA7F /* HomeViewController.swift in Sources */,
 				0EFCD671248ED5480085EAA2 /* SongOptionView.swift in Sources */,
 				0EF6EF53248499E6005BCA7F /* DefaultView.swift in Sources */,
+				0E2FF779249B0F5800B8B3DD /* NowPlayingView.swift in Sources */,
 				0E91D996248DEA2800A3F6F1 /* FloatingPoint+Extension.swift in Sources */,
 				0EB94A502463965500BC6717 /* UIColor+Extension.swift in Sources */,
 				0E43E5FF2491D035001B08A6 /* GenericMusicPlayer.swift in Sources */,
@@ -310,14 +310,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0EB94A412463961100BC6717 /* Song.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0EB94A422463961100BC6717 /* Base */,
-			);
-			name = Song.storyboard;
-			sourceTree = "<group>";
-		};
 		0EB94A462463961700BC6717 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -455,7 +447,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = NeoMusic/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -481,7 +473,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = NeoMusic/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NowPlayingView" customModule="NeoMusic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ev9-w8-nak" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
+                    <rect key="frame" x="20" y="64" width="72.5" height="72.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="arrow.left"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="e.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4Wd-Th-myk">
+                    <rect key="frame" x="285.5" y="494" width="20" height="17.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="4Wd-Th-myk" secondAttribute="height" multiplier="1:1" id="qnC-g0-Urj"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbi-Za-o71" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
+                    <rect key="frame" x="155.5" y="738.5" width="103.5" height="103.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="play.fill"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="buttonTintColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stt-Wz-NIx" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
+                    <rect key="frame" x="291" y="746.5" width="87.5" height="87.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="forward.fill"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="buttonTintColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxC-MK-wis">
+                    <rect key="frame" x="136.5" y="486.5" width="141" height="33.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kK3-7G-Dhu" customClass="DefaultImageView" customModule="NeoMusic" customModuleProvider="target">
+                    <rect key="frame" x="40" y="136.5" width="334" height="334"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="kK3-7G-Dhu" secondAttribute="height" multiplier="1:1" id="yoy-mQ-LXr"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ofb-Bu-tla">
+                    <rect key="frame" x="40" y="561.5" width="334" height="50.5"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="uCP-Ng-haQ">
+                            <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q82-4Y-h1m">
+                                    <rect key="frame" x="0.0" y="0.0" width="167" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLb-lD-rv1">
+                                    <rect key="frame" x="167" y="0.0" width="167" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eL2-pd-f7C" customClass="DefaultSlider" customModule="NeoMusic" customModuleProvider="target">
+                            <rect key="frame" x="-2" y="20.5" width="338" height="31"/>
+                            <color key="tintColor" name="TrackYellow"/>
+                        </slider>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Do5-lk-XuI">
+                    <rect key="frame" x="40" y="525" width="334" height="20.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ky8-AF-bfG" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
+                    <rect key="frame" x="321.5" y="64" width="72.5" height="72.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ky8-AF-bfG" secondAttribute="height" multiplier="1:1" id="ouA-Xp-hqJ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="line.horizontal.3"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIy-K5-k9q" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
+                    <rect key="frame" x="35.5" y="746.5" width="88" height="87.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="backward.fill"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="buttonTintColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpW-pN-qA7">
+                    <rect key="frame" x="156.5" y="90" width="101" height="20.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="xpW-pN-qA7" firstAttribute="centerY" secondItem="Ev9-w8-nak" secondAttribute="centerY" id="56k-lD-9ii"/>
+                <constraint firstItem="Wbi-Za-o71" firstAttribute="width" secondItem="Wbi-Za-o71" secondAttribute="height" multiplier="1:1" id="7v4-4O-tuU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Wbi-Za-o71" secondAttribute="bottom" constant="20" id="8hd-se-GI5"/>
+                <constraint firstItem="4Wd-Th-myk" firstAttribute="centerY" secondItem="JxC-MK-wis" secondAttribute="centerY" id="9Fg-kJ-CpL"/>
+                <constraint firstItem="Ev9-w8-nak" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="9J1-NP-O3N"/>
+                <constraint firstItem="ky8-AF-bfG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xpW-pN-qA7" secondAttribute="trailing" id="9LS-eR-ndc"/>
+                <constraint firstItem="kK3-7G-Dhu" firstAttribute="width" secondItem="kK3-7G-Dhu" secondAttribute="height" multiplier="1:1" id="9tF-10-Rmz"/>
+                <constraint firstItem="Wbi-Za-o71" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.25" id="AKc-YI-lMY"/>
+                <constraint firstItem="JxC-MK-wis" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="B0h-Ca-Eal"/>
+                <constraint firstItem="ky8-AF-bfG" firstAttribute="width" secondItem="ky8-AF-bfG" secondAttribute="height" multiplier="1:1" id="Ewy-GA-rfZ"/>
+                <constraint firstItem="Ev9-w8-nak" firstAttribute="width" secondItem="Ev9-w8-nak" secondAttribute="height" multiplier="1:1" id="G2Y-HU-dlB"/>
+                <constraint firstItem="Do5-lk-XuI" firstAttribute="trailing" secondItem="kK3-7G-Dhu" secondAttribute="trailing" id="NVc-Sw-trh"/>
+                <constraint firstItem="JxC-MK-wis" firstAttribute="top" secondItem="kK3-7G-Dhu" secondAttribute="bottom" constant="16" id="Nbu-MW-ay0"/>
+                <constraint firstItem="xpW-pN-qA7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ev9-w8-nak" secondAttribute="trailing" id="PCw-ce-qwM"/>
+                <constraint firstItem="JxC-MK-wis" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="PJk-PV-Pcc"/>
+                <constraint firstItem="kK3-7G-Dhu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="RXU-3j-8gJ"/>
+                <constraint firstItem="kK3-7G-Dhu" firstAttribute="leading" secondItem="ofb-Bu-tla" secondAttribute="leading" id="T08-gX-PhA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kK3-7G-Dhu" secondAttribute="trailing" constant="40" id="T55-At-D6w"/>
+                <constraint firstItem="Do5-lk-XuI" firstAttribute="leading" secondItem="kK3-7G-Dhu" secondAttribute="leading" id="Wh5-7Q-mOg"/>
+                <constraint firstItem="4Wd-Th-myk" firstAttribute="leading" secondItem="JxC-MK-wis" secondAttribute="trailing" constant="8" id="XnK-l8-gxp"/>
+                <constraint firstItem="ky8-AF-bfG" firstAttribute="width" secondItem="Ev9-w8-nak" secondAttribute="width" id="Xy5-JW-BTd"/>
+                <constraint firstItem="stt-Wz-NIx" firstAttribute="leading" secondItem="Wbi-Za-o71" secondAttribute="trailing" constant="32" id="aIi-dU-O0W"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JxC-MK-wis" secondAttribute="trailing" constant="40" id="abw-Mt-Miu"/>
+                <constraint firstItem="Ev9-w8-nak" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="b47-Vc-qhX"/>
+                <constraint firstItem="kK3-7G-Dhu" firstAttribute="trailing" secondItem="ofb-Bu-tla" secondAttribute="trailing" id="bMn-fD-qWi"/>
+                <constraint firstItem="Ev9-w8-nak" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.175" id="cFY-Kq-pCA"/>
+                <constraint firstItem="stt-Wz-NIx" firstAttribute="centerY" secondItem="Wbi-Za-o71" secondAttribute="centerY" id="cVt-O9-oz7"/>
+                <constraint firstItem="stt-Wz-NIx" firstAttribute="width" secondItem="stt-Wz-NIx" secondAttribute="height" multiplier="1:1" id="h2d-O3-pcH"/>
+                <constraint firstItem="hIy-K5-k9q" firstAttribute="width" secondItem="hIy-K5-k9q" secondAttribute="height" multiplier="1:1" id="i6X-uw-qFu"/>
+                <constraint firstItem="4Wd-Th-myk" firstAttribute="width" secondItem="4Wd-Th-myk" secondAttribute="height" multiplier="1:1" id="j6e-nY-pkl"/>
+                <constraint firstItem="kK3-7G-Dhu" firstAttribute="top" secondItem="Ev9-w8-nak" secondAttribute="bottom" id="jEA-x0-JFR"/>
+                <constraint firstItem="hIy-K5-k9q" firstAttribute="width" secondItem="Wbi-Za-o71" secondAttribute="width" multiplier="0.85" id="kz6-Se-yOX"/>
+                <constraint firstItem="xpW-pN-qA7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oxQ-Ms-B7C"/>
+                <constraint firstItem="Wbi-Za-o71" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pgP-Vd-IAL"/>
+                <constraint firstItem="ky8-AF-bfG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="puy-v9-a1T"/>
+                <constraint firstItem="Wbi-Za-o71" firstAttribute="leading" secondItem="hIy-K5-k9q" secondAttribute="trailing" constant="32" id="sif-v0-UX4"/>
+                <constraint firstItem="JxC-MK-wis" firstAttribute="top" secondItem="kK3-7G-Dhu" secondAttribute="bottom" constant="16" id="tGd-bI-r4g"/>
+                <constraint firstItem="hIy-K5-k9q" firstAttribute="centerY" secondItem="Wbi-Za-o71" secondAttribute="centerY" id="tiP-t1-vQ1"/>
+                <constraint firstItem="Do5-lk-XuI" firstAttribute="top" secondItem="JxC-MK-wis" secondAttribute="bottom" constant="5" id="wD8-Mf-ryE"/>
+                <constraint firstItem="ofb-Bu-tla" firstAttribute="top" secondItem="Do5-lk-XuI" secondAttribute="bottom" constant="16" id="wOo-xq-SMw"/>
+                <constraint firstItem="stt-Wz-NIx" firstAttribute="width" secondItem="Wbi-Za-o71" secondAttribute="width" multiplier="0.85" id="x42-bo-7ql"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ky8-AF-bfG" secondAttribute="trailing" constant="20" id="yOD-av-Fa8"/>
+                <constraint firstItem="4Wd-Th-myk" firstAttribute="width" secondItem="4Wd-Th-myk" secondAttribute="height" multiplier="1:1" id="yuK-Sx-St4"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="artistNameLabel" destination="Do5-lk-XuI" id="2nH-8n-tb3"/>
+                <outlet property="artworkImageView" destination="kK3-7G-Dhu" id="nW8-XV-mTa"/>
+                <outlet property="backButton" destination="Ev9-w8-nak" id="GPK-4E-sKI"/>
+                <outlet property="currentTimeLabel" destination="Q82-4Y-h1m" id="bGM-W2-tot"/>
+                <outlet property="explicitImage" destination="4Wd-Th-myk" id="6df-St-Pe4"/>
+                <outlet property="listButton" destination="ky8-AF-bfG" id="e9d-aX-ugC"/>
+                <outlet property="nowPlayingLabel" destination="xpW-pN-qA7" id="8KR-ao-HZy"/>
+                <outlet property="pausePlayButton" destination="Wbi-Za-o71" id="teG-iy-vPv"/>
+                <outlet property="skipBackButton" destination="hIy-K5-k9q" id="Jpw-15-7dJ"/>
+                <outlet property="skipForwardButton" destination="stt-Wz-NIx" id="M1T-DM-FSA"/>
+                <outlet property="songNameLabel" destination="JxC-MK-wis" id="hKd-oC-gro"/>
+                <outlet property="timeSlider" destination="eL2-pd-f7C" id="qre-Yr-7Pm"/>
+                <outlet property="totalTimeLabel" destination="OLb-lD-rv1" id="O3N-cQ-4fm"/>
+            </connections>
+            <point key="canvasLocation" x="141" y="114"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="e.square.fill" catalog="system" width="128" height="114"/>
+        <namedColor name="TrackYellow">
+            <color red="0.9179999828338623" green="0.72500002384185791" blue="0.1289999932050705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

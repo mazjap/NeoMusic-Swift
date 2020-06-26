@@ -45,7 +45,7 @@ class DefaultView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         // Create path to be drawn in (circle)
-        _ = UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: bounds.width / 2, height: bounds.height / 2)).addClip()
+        UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: bounds.width / 2, height: bounds.height / 2)).addClip()
 
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.saveGState()

@@ -9,12 +9,6 @@
 import Foundation
 import MediaPlayer
 
-protocol MusicPlayerDelegate: AnyObject {
-    func songUpdated(song: Song?)
-    func playerStatusUpdated(isPlaying: Bool)
-}
-
-
 class AppleMusicPlayer: NSObject, GenericMusicPlayer {
     weak var delegate: MusicPlayerDelegate?
     var queue = Queue<Song>()

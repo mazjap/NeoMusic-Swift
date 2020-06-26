@@ -41,7 +41,7 @@ class DefaultButton: DefaultView {
             let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors.reversed() as CFArray, locations: [0.0, 1.0])
             else { return }
         
-        _ = UIBezierPath(roundedRect: secondaryFrame, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: secondaryFrame.width / 2, height: secondaryFrame.height / 2)).addClip()
+        UIBezierPath(roundedRect: secondaryFrame, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: secondaryFrame.width / 2, height: secondaryFrame.height / 2)).addClip()
         
         let buttonGradientStartPoint = CGPoint(x: secondaryFrame.minX, y: secondaryFrame.minY)
         let buttonGradientEndPoint = CGPoint(x: secondaryFrame.maxX, y: secondaryFrame.maxY)

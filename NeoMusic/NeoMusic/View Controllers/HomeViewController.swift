@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     var settingsController = SettingsController.shared
     let gradientLayer = CAGradientLayer()
     var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
+    var nowPlayingView: NowPlayingView = .fromNib()
     
     let SpotifyClientID = "e5e6a8a7bca44bc1a12a5d0fa9af1235"
     let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
@@ -30,11 +31,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
         
         if settingsController.appleMusicStatus {
             self.musicPlayer = AppleMusicPlayer()
+            nowPlayingView.musicPlayer = musicPlayer
         }
     }
     
@@ -54,8 +55,17 @@ class HomeViewController: UIViewController {
     }
     
     private func setup() {
-        updateGradient()
+        let guide = view.layoutMarginsGuide
+        view.addSubview(nowPlayingView)
+        nowPlayingView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        nowPlayingView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        nowPlayingView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+        nowPlayingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        nowPlayingView.backgroundColor = .clear
+        
+        
         view.layer.insertSublayer(gradientLayer, at: 0)
+        updateGradient()
         
         if settingsController.spotifyStatus {
             spotifyButton.isHidden = true
@@ -79,7 +89,6 @@ class HomeViewController: UIViewController {
     private func setupSections() {
         songSectionStackView.translatesAutoresizingMaskIntoConstraints = false;
         songSectionStackView.spacing = 10
-        
         var buttons = [SongOptionView]()
         for val in SongType.allCases {
             list.append(val)
@@ -91,7 +100,7 @@ class HomeViewController: UIViewController {
             button.translatesAutoresizingMaskIntoConstraints = false
             button.heightAnchor.constraint(equalToConstant: 40).isActive = true
             button.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-//
+            
             button.data = val
             buttons.append(button)
         }
@@ -105,14 +114,13 @@ class HomeViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowSongVCSegue", let destVC = segue.destination as? SongViewController {
-            destVC.musicPlayer = musicPlayer
-            destVC.settingsController = settingsController
-        }
+        nowPlayingView.musicPlayer = musicPlayer
+        nowPlayingView.settingsController = settingsController
     }
     
     @IBAction func connectSpotify(_ sender: MusicButton) {
-        performSegue(withIdentifier: "ShowSongVCSegue", sender: self)
+        nowPlayingView.musicPlayer = musicPlayer
+        nowPlayingView.settingsController = settingsController
     }
     
     @IBAction func connectAppleMusic(_ sender: MusicButton) {
@@ -148,7 +156,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: SongOptionDelegate {
     func buttonWasTapped(type: SongType) {
-        performSegue(withIdentifier: "ShowSongVCSegue", sender: self)
+        nowPlayingView.isOpen = true
         musicPlayer?.setSongList(type)
     }
 }
