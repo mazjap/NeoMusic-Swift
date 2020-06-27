@@ -43,6 +43,8 @@ class DefaultView: UIView {
     // MARK: - Superclass Functions
     
     override func draw(_ rect: CGRect) {
+        shadowView.frame = CGRect(origin: frame.origin, size: rect.size)
+        
         super.draw(rect)
         // Create path to be drawn in (circle)
         UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: bounds.width / 2, height: bounds.height / 2)).addClip()
@@ -87,16 +89,14 @@ class DefaultView: UIView {
             difference = 0.5
         }
         
-        layer.shadowOpacity = difference * 0.5
+        layer.shadowOpacity = 0.25
         layer.shadowColor = UIColor.white.cgColor
         layer.shadowOffset = CGSize(width: -frame.height / 20, height: -frame.height / 20)
         layer.shadowRadius = 14
         
-        insertSubview(shadowView, at: 0)
-        shadowView.frame = CGRect(center: bounds.center, size: bounds.size)
-        shadowView.backgroundColor = .clear
+        shadowView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         shadowView.layer.cornerRadius = frame.height / 2
-        shadowView.layer.shadowOpacity = 1 - difference
+        shadowView.layer.shadowOpacity = difference
         shadowView.layer.shadowColor = UIColor.black.cgColor
         shadowView.layer.shadowOffset = CGSize(width: frame.height / 20, height: frame.height / 20)
         shadowView.layer.shadowRadius = 20
@@ -111,7 +111,6 @@ class DefaultView: UIView {
         endPoint = CGPoint(x: frame.maxX, y: frame.minY)
         
         setupGradient()
-        setupShadows()
         backgroundColor = .clear
         
         secondaryFrame = bounds.changeSize(const: 5)
@@ -123,3 +122,5 @@ class DefaultView: UIView {
         updateColors()
     }
 }
+
+

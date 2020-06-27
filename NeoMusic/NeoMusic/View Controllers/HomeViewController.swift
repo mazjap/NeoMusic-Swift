@@ -61,7 +61,6 @@ class HomeViewController: UIViewController {
         nowPlayingView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         nowPlayingView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
         nowPlayingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        nowPlayingView.backgroundColor = .clear
         
         
         view.layer.insertSublayer(gradientLayer, at: 0)

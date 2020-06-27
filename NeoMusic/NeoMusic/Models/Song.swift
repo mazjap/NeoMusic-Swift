@@ -13,9 +13,9 @@ struct Song {
     let artist: String?
     let artwork: UIImage?
     let title: String?
+    var lyrics: Lyrics?
     let duration: TimeInterval
     let media: MPMediaItem
-    var lyrics: Lyrics
     var isExplicit: Bool
     
     init?(song: Any) {
@@ -33,6 +33,44 @@ struct Song {
             return nil
         }
     }
+    
+    private init(artist: String?, artwork: UIImage?, title: String?, duration: TimeInterval?, media: MPMediaItem?, lyrics: Lyrics?, isExplicit: Bool?) {
+        self.artist = artist
+        self.lyrics = lyrics
+        
+        
+        if let artwork = artwork {
+            self.artwork = artwork
+        } else {
+            self.artwork = UIImage(named: "Placeholder")
+        }
+        
+        if let title = title {
+            self.title = title
+        } else {
+            self.title = "No Song Selected"
+        }
+        
+        if let duration = duration {
+            self.duration = duration
+        } else {
+            self.duration = 0.01
+        }
+        
+        if let media = media {
+            self.media = media
+        } else {
+            self.media = MPMediaItem()
+        }
+        
+        if let isExplicit = isExplicit {
+            self.isExplicit = isExplicit
+        } else {
+            self.isExplicit = false
+        }
+    }
+    
+    static var noSong = Song(artist: nil, artwork: nil, title: nil, duration: nil, media: nil, lyrics: nil, isExplicit: nil)
 }
 
 struct Lyrics {

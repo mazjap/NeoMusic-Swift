@@ -21,6 +21,7 @@ class NowPlayingView: UIView {
             playerStatusUpdated()
         }
     }
+    
     var settingsController: SettingsController?
     let gradientLayer = CAGradientLayer()
     var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
@@ -47,6 +48,9 @@ class NowPlayingView: UIView {
     @IBOutlet private weak var skipBackButton: DefaultButton!
     @IBOutlet private weak var skipForwardButton: DefaultButton!
     @IBOutlet private weak var pausePlayButton: DefaultButton!
+    @IBOutlet weak var secondarySongNameLabel: UILabel!
+    
+    var ibs = [UIView]()
     
     // MARK: - Class Functions
     
@@ -76,6 +80,12 @@ class NowPlayingView: UIView {
         return Bundle.main.loadNibNamed("MainNavbar", owner: nil, options: nil)?.first
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        setupShadows()
+    }
+    
     // MARK: - Public Functions
     
     func toggle(_ bool: Bool? = nil) {
@@ -93,6 +103,9 @@ class NowPlayingView: UIView {
               let _ = timeSlider, let _ = explicitImage, !hasBeenSetup else { return }
         hasBeenSetup = true
         
+        ibs = [backButton, listButton, nowPlayingLabel, artworkImageView, songNameLabel, explicitImage, artistNameLabel,
+               currentTimeLabel, totalTimeLabel, timeSlider, skipBackButton, skipForwardButton, pausePlayButton]
+        
         currentSong = musicPlayer?.song
         
         artworkImageView.isUserInteractionEnabled = true
@@ -108,8 +121,15 @@ class NowPlayingView: UIView {
         explicitImage.tintColor = .buttonColor
         
         setupButtons()
-        
-        closeMenu(false)
+    }
+    
+    private func setupShadows() {
+        for view in ibs {
+            if let deview = view as? DefaultView {
+                insertSubview(deview.shadowView, at: 0)
+                deview.setupShadows()
+            }
+        }
     }
     
     private func updateGradient() {
@@ -120,25 +140,21 @@ class NowPlayingView: UIView {
     private func updateViews() {
         guard let _ = artworkImageView, let _ = totalTimeLabel, let _ = artistNameLabel, let _ = songNameLabel, let _ = timeSlider, let _ = explicitImage else { return }
         
-        if let song = currentSong {
-            artworkImageView.setImage(song.artwork)
-            totalTimeLabel.text = song.duration.stringTime
-            artistNameLabel.text = song.artist
-            songNameLabel.text = song.title
-            timeSlider.maximumValue = Float(song.duration)
-            updateTime()
-            explicitImage.isHidden = !song.isExplicit
-        } else if let song = musicPlayer?.song {
-            currentSong = song
+        let song: Song
+        if let currentSong = currentSong {
+            song = currentSong
         } else {
-            artworkImageView.setImage(UIImage(named: "Placeholder"))
-            explicitImage.isHidden = true
-            totalTimeLabel.text = "0:00"
-            artistNameLabel.text = ""
-            songNameLabel.text = "No Song Selected"
-            timeSlider.maximumValue = 0.01
-            timeSlider.value = 0
+            song = .noSong
         }
+        
+        artworkImageView.setImage(song.artwork)
+        totalTimeLabel.text = song.duration.stringTime
+        artistNameLabel.text = song.artist
+        songNameLabel.text = song.title
+        secondarySongNameLabel.text = song.title
+        timeSlider.maximumValue = Float(song.duration)
+        updateTime()
+        explicitImage.isHidden = !song.isExplicit
     }
     
     private func updateTime() {
@@ -180,6 +196,14 @@ class NowPlayingView: UIView {
     
     private func showHide() {
         DispatchQueue.main.async {
+            self.backButton.backgroundColor = .clear
+            self.backButton.tintColor = .clear
+            self.backButton.buttonTintColor = .clear
+            self.listButton.backgroundColor = .clear
+            self.listButton.tintColor = .clear
+            self.listButton.buttonTintColor = .clear
+            self.nowPlayingLabel.tintColor = .clear
+            
             self.backButton.isHidden = !self.isOpen
             self.listButton.isHidden = !self.isOpen
             self.nowPlayingLabel.isHidden = !self.isOpen
@@ -198,6 +222,41 @@ class NowPlayingView: UIView {
                 self.skipBackButton.button.transform = .identity
                 self.skipForwardButton.button.transform = .identity
                 self.showHide()
+                self.secondarySongNameLabel.tintColor = .clear
+            }
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.5, animations: action) { _ in
+                self.secondarySongNameLabel.isHidden = true
+            }
+        } else {
+            action()
+            self.secondarySongNameLabel.isHidden = true
+        }
+    }
+    
+    private func closeMenu(_ animated: Bool = true) {
+        isOpen = false
+        secondarySongNameLabel.isHidden = false
+        
+        let viewTransformation = CGAffineTransform(translationX: 0, y: frame.height - frame.width * 0.175 - 40)
+        let imageViewTransformation = CGAffineTransform(translationX: backButton.frame.center.x - artworkImageView.frame.center.x, y: backButton.frame.center.y - artworkImageView.frame.center.y).scaledBy(x: 80 / artworkImageView.bounds.width, y: 80 / artworkImageView.bounds.height)
+        let titleLabelTransformation = CGAffineTransform(translationX: backButton.frame.center.x - songNameLabel.frame.center.x, y: nowPlayingLabel.frame.center.y - backButton.frame.center.y).scaledBy(x: 0.55, y: 0.55)
+        let pausePlayButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x - 20 - pausePlayButton.frame.center.x, y: backButton.frame.center.y - skipBackButton.frame.center.y).scaledBy(x: 0.4, y: 0.4)
+        let skipBackButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x - 70 - skipBackButton.frame.center.x, y: backButton.frame.center.y - skipBackButton.frame.center.y).scaledBy(x: 0.45, y: 0.45)
+        let skipForwardButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x + 30 - skipForwardButton.frame.center.x, y: backButton.frame.center.y - skipForwardButton.frame.center.y).scaledBy(x: 0.45, y: 0.45)
+        
+        let action = {
+            DispatchQueue.main.async { [unowned self] in
+                self.transform = viewTransformation
+                self.artworkImageView.transform = imageViewTransformation
+                self.songNameLabel.transform = titleLabelTransformation
+                self.pausePlayButton.transform = pausePlayButtonTransformation
+                self.skipBackButton.transform = skipBackButtonTransformation
+                self.skipForwardButton.transform = skipForwardButtonTransformation
+                self.showHide()
+                self.secondarySongNameLabel.tintColor = .white
             }
         }
         
@@ -206,35 +265,6 @@ class NowPlayingView: UIView {
         } else {
             action()
         }
-    }
-    
-    private func closeMenu(_ animated: Bool = true) {
-        isOpen = false
-        
-        let viewTransformation = CGAffineTransform(translationX: 0, y: self.bounds.height - 300)
-        let imageViewTransformation = CGAffineTransform(translationX: backButton.frame.center.x - artworkImageView.frame.center.x, y: backButton.frame.center.y - artworkImageView.frame.center.y).scaledBy(x: 80 / artworkImageView.bounds.width, y: 80 / artworkImageView.bounds.height)
-        let titleLabelTransformation = CGAffineTransform(translationX: backButton.frame.center.x - songNameLabel.frame.center.x, y: nowPlayingLabel.frame.center.y - backButton.frame.center.y).scaledBy(x: 0.55, y: 0.55)
-        let pausePlayButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x - 10 - pausePlayButton.frame.center.x, y: listButton.frame.center.y - backButton.frame.center.y)
-        let skipBackButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x - 40 - skipBackButton.frame.center.x, y: listButton.frame.center.y - backButton.frame.center.y)
-        let skipForwardButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x + 20 - skipForwardButton.frame.center.x, y: backButton.frame.center.y - skipForwardButton.frame.center.y)
-        
-        let action = {
-            DispatchQueue.main.async { [unowned self] in
-                self.transform = viewTransformation
-                self.artworkImageView.transform = imageViewTransformation
-                self.songNameLabel.transform = titleLabelTransformation
-                self.pausePlayButton.button.transform = pausePlayButtonTransformation
-                self.skipBackButton.button.transform = skipBackButtonTransformation
-                self.skipForwardButton.button.transform = skipForwardButtonTransformation
-                self.showHide()
-            }
-        }
-        
-//        if animated {
-//            UIView.animate(withDuration: 0.5, animations: action)
-//        } else {
-//            action()
-//        }
     }
     
     // MARK: - Objective-C Functions
