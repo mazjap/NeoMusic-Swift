@@ -79,7 +79,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 See [wiki][wiki-url] for further technical details on the project.
 
-[swift-image]: https://img.shields.io/badge/swift-5-green.svg
+[swift-image]: https://img.shields.io/badge/Swift-5-green.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE
