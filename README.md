@@ -1,10 +1,5 @@
 # NeoMusic
 
-Goal:
-  `A beautiful and elegant app to hold *all* of your music, from everywhere in one place.`
-
-## Project Overview
-
 ~~You can find the project on [the App Store](https://google.com/)~~.
 
 [![Swift Version][swift-image]][swift-url]
@@ -15,9 +10,6 @@ Goal:
 
 ![GitHub issues](https://img.shields.io/github/issues/mazjap/NeoMusic-Swift)
 
-NeoMusic is a music player designed with a touch of neomorphism to give the feel of views popping off the screen.
-
-What NeoMusic will one day be:
 NeoMusic is a music player designed to connect Spotify, Soundcloud, Apple Music, etc. into one single app. Taking design queues from neomorphism, buttons and other views have the appearance of popping off the screen.
 
 ![](header.png)
