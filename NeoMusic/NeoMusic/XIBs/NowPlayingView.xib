@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,7 +16,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ev9-w8-nak" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
                     <rect key="frame" x="20" y="64" width="72.5" height="72.5"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="arrow.left"/>
                     </userDefinedRuntimeAttributes>
@@ -31,7 +29,7 @@
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbi-Za-o71" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
                     <rect key="frame" x="155.5" y="738.5" width="103.5" height="103.5"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="play.fill"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="buttonTintColor">
@@ -41,7 +39,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stt-Wz-NIx" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
                     <rect key="frame" x="291" y="746.5" width="87.5" height="87.5"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="forward.fill"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="buttonTintColor">
@@ -57,7 +55,7 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kK3-7G-Dhu" customClass="DefaultImageView" customModule="NeoMusic" customModuleProvider="target">
                     <rect key="frame" x="40" y="136.5" width="334" height="334"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="kK3-7G-Dhu" secondAttribute="height" multiplier="1:1" id="yoy-mQ-LXr"/>
                     </constraints>
@@ -96,7 +94,7 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ky8-AF-bfG" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
                     <rect key="frame" x="321.5" y="64" width="72.5" height="72.5"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ky8-AF-bfG" secondAttribute="height" multiplier="1:1" id="ouA-Xp-hqJ"/>
                     </constraints>
@@ -106,7 +104,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIy-K5-k9q" customClass="DefaultButton" customModule="NeoMusic" customModuleProvider="target">
                     <rect key="frame" x="35.5" y="746.5" width="88" height="87.5"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="backward.fill"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="buttonTintColor">
@@ -127,8 +125,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="xpW-pN-qA7" firstAttribute="centerY" secondItem="Ev9-w8-nak" secondAttribute="centerY" id="56k-lD-9ii"/>
                 <constraint firstItem="Wbi-Za-o71" firstAttribute="width" secondItem="Wbi-Za-o71" secondAttribute="height" multiplier="1:1" id="7v4-4O-tuU"/>
@@ -177,6 +174,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ky8-AF-bfG" secondAttribute="trailing" constant="20" id="yOD-av-Fa8"/>
                 <constraint firstItem="4Wd-Th-myk" firstAttribute="width" secondItem="4Wd-Th-myk" secondAttribute="height" multiplier="1:1" id="yuK-Sx-St4"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="artistNameLabel" destination="Do5-lk-XuI" id="2nH-8n-tb3"/>
                 <outlet property="artworkImageView" destination="kK3-7G-Dhu" id="nW8-XV-mTa"/>
@@ -201,8 +199,5 @@
         <namedColor name="TrackYellow">
             <color red="0.9179999828338623" green="0.72500002384185791" blue="0.1289999932050705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

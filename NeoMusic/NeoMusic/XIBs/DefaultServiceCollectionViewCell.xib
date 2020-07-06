@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="xTX-Vk-EVE" customClass="DefaultServiceCollectionViewCell" customModule="NeoMusic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqc-Dk-HHh">
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="4gy-RG-4fS"/>
+                        <constraint firstAttribute="height" constant="64" id="w1K-zQ-uBa"/>
+                    </constraints>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="dqc-Dk-HHh" firstAttribute="top" secondItem="xTX-Vk-EVE" secondAttribute="top" id="G68-fj-gwJ"/>
+                <constraint firstItem="ZhZ-K6-Ccr" firstAttribute="bottom" secondItem="dqc-Dk-HHh" secondAttribute="bottom" id="Gd4-WG-8zM"/>
+                <constraint firstAttribute="trailing" secondItem="dqc-Dk-HHh" secondAttribute="trailing" id="KWn-HE-LtH"/>
+                <constraint firstItem="dqc-Dk-HHh" firstAttribute="leading" secondItem="xTX-Vk-EVE" secondAttribute="leading" id="zAc-Qc-rX7"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="ZhZ-K6-Ccr"/>
+            <connections>
+                <outlet property="connectServiceButton" destination="dqc-Dk-HHh" id="1ik-L8-Fc4"/>
+            </connections>
+            <point key="canvasLocation" x="159" y="102"/>
+        </view>
+    </objects>
+</document>

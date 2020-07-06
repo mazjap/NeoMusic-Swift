@@ -18,15 +18,17 @@ class NowPlayingView: UIView {
             NotificationCenter.default.addObserver(self, selector: #selector(songUpdated), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(playerStatusUpdated), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
             
+            prepareToPlay()
             playerStatusUpdated()
         }
     }
     
+    var ibs = [UIView]()
     var settingsController: SettingsController?
     let gradientLayer = CAGradientLayer()
     var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
     var hasBeenSetup = false
-    var isOpen = false
+    var isOpen = true
     var currentSong: Song? {
         didSet {
             updateViews()
@@ -48,9 +50,7 @@ class NowPlayingView: UIView {
     @IBOutlet private weak var skipBackButton: DefaultButton!
     @IBOutlet private weak var skipForwardButton: DefaultButton!
     @IBOutlet private weak var pausePlayButton: DefaultButton!
-    @IBOutlet weak var secondarySongNameLabel: UILabel!
-    
-    var ibs = [UIView]()
+    @IBOutlet private weak var secondarySongNameLabel: UILabel!
     
     // MARK: - Class Functions
     
@@ -90,9 +90,9 @@ class NowPlayingView: UIView {
     
     func toggle(_ bool: Bool? = nil) {
         if let bool = bool {
-            bool ? openMenu() : closeMenu()
+            bool ? performOpenAction() : performCloseAction()
         } else {
-            isOpen ? closeMenu() : openMenu()
+            isOpen ? performCloseAction() : performOpenAction()
         }
     }
     
@@ -121,6 +121,8 @@ class NowPlayingView: UIView {
         explicitImage.tintColor = .buttonColor
         
         setupButtons()
+        
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(dragView)))
     }
     
     private func setupShadows() {
@@ -170,11 +172,12 @@ class NowPlayingView: UIView {
     private func setupButtons() {
         backButton.action = { [unowned self] in
             self.tap()
-            self.closeMenu()
+            self.toggle(false)
         }
         
         listButton.action = { [unowned self] in // TODO: - Add action
             self.tap()
+            self.toggle(true)
         }
         
         skipBackButton.action = { [unowned self] in
@@ -194,76 +197,62 @@ class NowPlayingView: UIView {
         }
     }
     
-    private func showHide() {
-        DispatchQueue.main.async {
-            self.backButton.backgroundColor = .clear
-            self.backButton.tintColor = .clear
-            self.backButton.buttonTintColor = .clear
-            self.listButton.backgroundColor = .clear
-            self.listButton.tintColor = .clear
-            self.listButton.buttonTintColor = .clear
-            self.nowPlayingLabel.tintColor = .clear
-            
-            self.backButton.isHidden = !self.isOpen
-            self.listButton.isHidden = !self.isOpen
-            self.nowPlayingLabel.isHidden = !self.isOpen
-        }
+    private func prepareToPlay(_ songCategory: SongCategory = .all) {
+        musicPlayer?.setSongList(songCategory)
     }
     
-    private func openMenu(_ animated: Bool = true) {
+    private func showHide() {
+        backButton.isHidden = !isOpen
+        listButton.isHidden = !isOpen
+        nowPlayingLabel.isHidden = !isOpen
+    }
+    
+    private func performOpenAction(_ currentLocation: CGFloat = 0) {
         isOpen = true
         
-        let action = {
-            DispatchQueue.main.async { [unowned self] in
-                self.transform = .identity
-                self.artworkImageView.transform = .identity
-                self.songNameLabel.transform = .identity
-                self.pausePlayButton.button.transform = .identity
-                self.skipBackButton.button.transform = .identity
-                self.skipForwardButton.button.transform = .identity
-                self.showHide()
-                self.secondarySongNameLabel.tintColor = .clear
-            }
-        }
+        let viewTransformation = CGAffineTransform(translationX: 0, y: currentLocation - frame.height / 2)
+        let imageViewTransformation = CGAffineTransform.identity
+        let titleLabelTransformation = CGAffineTransform.identity
+        let pausePlayButtonTransformation = CGAffineTransform.identity
+        let skipBackButtonTransformation = CGAffineTransform.identity
+        let skipForwardButtonTransformation = CGAffineTransform.identity
         
-        if animated {
-            UIView.animate(withDuration: 0.5, animations: action) { _ in
-                self.secondarySongNameLabel.isHidden = true
-            }
-        } else {
-            action()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.transform = viewTransformation
+            self.artworkImageView.transform = imageViewTransformation
+            self.songNameLabel.transform = titleLabelTransformation
+            self.pausePlayButton.transform = pausePlayButtonTransformation
+            self.skipBackButton.transform = skipBackButtonTransformation
+            self.skipForwardButton.transform = skipForwardButtonTransformation
+            self.secondarySongNameLabel.tintColor = .clear
+        }) { _ in
             self.secondarySongNameLabel.isHidden = true
+            self.showHide()
         }
     }
     
-    private func closeMenu(_ animated: Bool = true) {
+    private func performCloseAction(_ currentLocation: CGFloat = 0) {
         isOpen = false
+        
+        let viewTransformation = CGAffineTransform(translationX: 0, y: frame.height - frame.width * 0.175 - 40 - currentLocation)
+        let imageViewTransformation = CGAffineTransform(scaleX: 80 / artworkImageView.bounds.width, y: 80 / artworkImageView.bounds.height).concatenating(CGAffineTransform(translationX: backButton.frame.center.x - artworkImageView.frame.center.x, y: backButton.frame.center.y - artworkImageView.frame.center.y))
+        let titleLabelTransformation = CGAffineTransform(scaleX: 0.55, y: 0.55).concatenating(CGAffineTransform(translationX: backButton.frame.center.x - songNameLabel.frame.center.x, y: nowPlayingLabel.frame.center.y - backButton.frame.center.y))
+        let pausePlayButtonTransformation = CGAffineTransform(scaleX: 0.4, y: 0.4).concatenating(CGAffineTransform(translationX: listButton.frame.center.x - 20 - pausePlayButton.frame.center.x, y: backButton.frame.center.y - skipBackButton.frame.center.y))
+        let skipBackButtonTransformation = CGAffineTransform(scaleX: 0.45, y: 0.45).concatenating(CGAffineTransform(translationX: listButton.frame.center.x - 70 - skipBackButton.frame.center.x, y: backButton.frame.center.y - skipBackButton.frame.center.y))
+        let skipForwardButtonTransformation = CGAffineTransform(scaleX: 0.45, y: 0.45).concatenating(CGAffineTransform(translationX: listButton.frame.center.x + 30 - skipForwardButton.frame.center.x, y: backButton.frame.center.y - skipForwardButton.frame.center.y))
+        
         secondarySongNameLabel.isHidden = false
         
-        let viewTransformation = CGAffineTransform(translationX: 0, y: frame.height - frame.width * 0.175 - 40)
-        let imageViewTransformation = CGAffineTransform(translationX: backButton.frame.center.x - artworkImageView.frame.center.x, y: backButton.frame.center.y - artworkImageView.frame.center.y).scaledBy(x: 80 / artworkImageView.bounds.width, y: 80 / artworkImageView.bounds.height)
-        let titleLabelTransformation = CGAffineTransform(translationX: backButton.frame.center.x - songNameLabel.frame.center.x, y: nowPlayingLabel.frame.center.y - backButton.frame.center.y).scaledBy(x: 0.55, y: 0.55)
-        let pausePlayButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x - 20 - pausePlayButton.frame.center.x, y: backButton.frame.center.y - skipBackButton.frame.center.y).scaledBy(x: 0.4, y: 0.4)
-        let skipBackButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x - 70 - skipBackButton.frame.center.x, y: backButton.frame.center.y - skipBackButton.frame.center.y).scaledBy(x: 0.45, y: 0.45)
-        let skipForwardButtonTransformation = CGAffineTransform(translationX: listButton.frame.center.x + 30 - skipForwardButton.frame.center.x, y: backButton.frame.center.y - skipForwardButton.frame.center.y).scaledBy(x: 0.45, y: 0.45)
-        
-        let action = {
-            DispatchQueue.main.async { [unowned self] in
-                self.transform = viewTransformation
-                self.artworkImageView.transform = imageViewTransformation
-                self.songNameLabel.transform = titleLabelTransformation
-                self.pausePlayButton.transform = pausePlayButtonTransformation
-                self.skipBackButton.transform = skipBackButtonTransformation
-                self.skipForwardButton.transform = skipForwardButtonTransformation
-                self.showHide()
-                self.secondarySongNameLabel.tintColor = .white
-            }
-        }
-        
-        if animated {
-            UIView.animate(withDuration: 0.5, animations: action)
-        } else {
-            action()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.transform = viewTransformation
+            self.artworkImageView.transform = imageViewTransformation
+            self.songNameLabel.transform = titleLabelTransformation
+            self.pausePlayButton.transform = pausePlayButtonTransformation
+            self.skipBackButton.transform = skipBackButtonTransformation
+            self.skipForwardButton.transform = skipForwardButtonTransformation
+            self.secondarySongNameLabel.tintColor = .white
+        }) { _ in
+            self.showHide()
         }
     }
     
@@ -293,6 +282,45 @@ class NowPlayingView: UIView {
     @objc
     private func songUpdated() {
         currentSong = musicPlayer?.song
+    }
+    
+    @objc
+    func dragView(_ sender: UIPanGestureRecognizer) {
+        guard let superview = superview else { return }
+        
+        let translation = sender.translation(in: self)
+        let locationY = sender.location(in: superview).y
+        let offset = self.center.y - superview.center.y
+        
+        if sender.state == .began || sender.state == .changed {
+            if isOpen {
+                if locationY <= 2 * superview.frame.height / 3{
+                    performCloseAction(offset)
+                    sender.isEnabled = false
+                }
+            } else {
+                if locationY > superview.frame.maxY - 100 {
+                    performOpenAction(offset)
+                    sender.isEnabled = false
+                }
+            }
+            
+            if frame.minY + translation.y < superview.frame.maxY - 100 {
+                center = CGPoint(x: center.x, y: center.y + translation.y)
+                sender.setTranslation(CGPoint.zero, in: self)
+            }
+        } else if sender.state == .ended {
+            if sender.isEnabled {
+                if isOpen {
+                    center = CGPoint(x: center.x, y: superview.center.y)
+                } else {
+                    center = CGPoint(x: center.x, y: frame.height - frame.width * 0.175 - 40)
+                }
+            } else if sender.location(in: superview).y >= superview.frame.height / 2 {
+                performOpenAction(offset)
+            }
+            sender.isEnabled = true
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

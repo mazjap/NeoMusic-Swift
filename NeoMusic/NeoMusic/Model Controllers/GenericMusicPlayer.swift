@@ -21,7 +21,7 @@ protocol GenericMusicPlayer: AnyObject {
     var currentTime: TimeInterval { get }
     var delegate: MusicPlayerDelegate? { get set }
     
-    func getSongs(_ type: SongType, isShuffled: Bool) -> [Media]
+    func getSongs(_ type: SongCategory, isShuffled: Bool) -> [Media]
     func pause()
     func play()
     func set(time: TimeInterval)

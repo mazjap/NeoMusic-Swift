@@ -47,9 +47,8 @@ class DefaultImageView: DefaultView {
         
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true
-        imageView.contentMode = .scaleAspectFill
         
-        let rotationGesture = UIPanGestureRecognizer(target: self, action: #selector(handleRotation(sender:)))
+        let rotationGesture = UIPanGestureRecognizer(target: self, action: #selector(handleRotation))
         imageView.addGestureRecognizer(rotationGesture)
         
         insertSubview(imageView, aboveSubview: self)
@@ -117,7 +116,7 @@ class DefaultImageView: DefaultView {
     // MARK: - Objective-C Functions
 
     @objc
-    private func handleRotation(sender: UIPanGestureRecognizer) {
+    private func handleRotation(_ sender: UIPanGestureRecognizer) {
         let location = sender.location(in: imageView)
         let gestureRotation = CGFloat(angle(from: location)) - startRotationAngle
         

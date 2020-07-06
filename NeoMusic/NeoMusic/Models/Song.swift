@@ -87,8 +87,33 @@ struct Lyrics {
     }
 }
 
-enum SongType: String, CaseIterable {
+enum SongCategory: String, CaseIterable {
     case downloaded = "Downloaded"
     case favorite = "Favorites"
     case all = "All Music"
+}
+
+enum SongType: String, CaseIterable {
+    case spotify = "logo-spotify"
+    case appleMusic = "logo-apple-music"
+    
+    func name() -> String? {
+        if self == .appleMusic {
+            return "Apple Music"
+        } else if self == .spotify {
+            return "Spotify"
+        }
+        
+        return "Unknown"
+    }
+}
+
+enum yeah {
+    case uno
+    case dos
+    case tres
+}
+
+extension yeah: CaseIterable {
+    
 }

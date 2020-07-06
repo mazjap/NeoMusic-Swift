@@ -9,11 +9,11 @@
 import UIKit
 
 protocol SongOptionDelegate: AnyObject {
-    func buttonWasTapped(type: SongType)
+    func buttonWasTapped(type: SongCategory)
 }
 
 class SongOptionView: UIView {
-    var data: SongType? {
+    var data: SongCategory? {
         didSet {
             setup()
             updateViews()

@@ -46,13 +46,14 @@ class AppleMusicPlayer: NSObject, GenericMusicPlayer {
         player.currentPlaybackTime
     }
     
-    func setSongList(_ type: SongType = .all, isShuffled: Bool = true) {
+    func setSongList(_ type: SongCategory = .all, isShuffled: Bool = true) {
         let songs = getSongs(type, isShuffled: isShuffled)
         
         player.setQueue(with: MPMediaItemCollection(items: songs))
+        player.prepareToPlay()
     }
     
-    internal func getSongs(_ type: SongType, isShuffled: Bool) -> [MPMediaItem] {
+    internal func getSongs(_ type: SongCategory, isShuffled: Bool) -> [MPMediaItem] {
         var songs: [MPMediaItem] = []
         let query = MPMediaQuery.songs()
         guard let collections: [MPMediaItemCollection] = query.collections else { return [] }

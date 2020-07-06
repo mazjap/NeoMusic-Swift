@@ -1,6 +1,6 @@
 # NeoMusic
 
-~~You can find the project on [the App Store](https://google.com/)~~.
+~~You can find the project on [the App Store](https://apple.com/)~~.
 
 [![Swift Version][swift-image]][swift-url]
 
@@ -42,7 +42,7 @@ NeoMusic is a music player designed to connect Spotify, Soundcloud, Apple Music,
 
 ## Contributing/Bug Reports
 
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+When contributing to this repository, please [contact me][wiki-url]
 
 ### Feature Requests
 

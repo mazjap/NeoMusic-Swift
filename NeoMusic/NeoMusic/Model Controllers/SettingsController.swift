@@ -14,14 +14,6 @@ class SettingsController {
     private let spotifyKey = "com.mazjap.NeoMusic.SettingsController.SpotifyStatus"
     private let angleKey = "com.mazjap.NeoMusic.SettingsController.Angle"
     
-    var appleMusicStatus: Bool {
-        fetchAppleMusicStatus()
-    }
-    
-    var spotifyStatus: Bool {
-        fetchSpotifyStatus()
-    }
-    
     var imageAngle: CGFloat {
         fetchAngle()
     }
@@ -29,6 +21,17 @@ class SettingsController {
     static var shared = SettingsController()
     
     private init() {}
+    
+    func status(of type: SongType) -> Bool {
+        switch type {
+        case .appleMusic:
+            return fetchAppleMusicStatus()
+        case .spotify:
+            return fetchSpotifyStatus()
+        @unknown default:
+            fatalError("Selection is invalid or isn't supported. THIS IS A BUG! Please report it if found.")
+        }
+    }
     
     private func fetchAppleMusicStatus() -> Bool {
         let bool = userDefaults.bool(forKey: appleMusicKey)
@@ -47,6 +50,10 @@ class SettingsController {
     
     func setAppleMusicStatus(_ bool: Bool) {
         userDefaults.set(bool, forKey: appleMusicKey)
+    }
+    
+    func allowAppleMusic() {
+        
     }
     
     func setSpotifyStatus(_ bool: Bool) {

@@ -24,6 +24,12 @@ class DefaultView: UIView {
     var startPoint = CGPoint()
     var endPoint = CGPoint()
     
+    override var isHidden: Bool {
+        didSet {
+            shadowView.isHidden = isHidden
+        }
+    }
+    
     // MARK: - Initializers
     
     override init(frame: CGRect) {
