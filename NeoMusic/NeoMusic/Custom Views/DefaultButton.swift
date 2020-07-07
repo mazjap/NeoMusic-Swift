@@ -35,7 +35,7 @@ class DefaultButton: DefaultView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        secondaryFrame = rect.changeSize(const: 5)
+        let secondaryFrame = rect.changeSize(mult: 0.95)
         
         guard let context = UIGraphicsGetCurrentContext(),
             let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors.reversed() as CFArray, locations: [0.0, 1.0])
@@ -47,24 +47,24 @@ class DefaultButton: DefaultView {
         let buttonGradientEndPoint = CGPoint(x: secondaryFrame.maxX, y: secondaryFrame.maxY)
         
         context.drawLinearGradient(gradient, start: buttonGradientStartPoint, end: buttonGradientEndPoint, options: [])
-        
-        button.frame = secondaryFrame
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        button.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
     }
 
     override func updateViews() {
         super.updateViews()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(performAction(_:)))
         tap.numberOfTapsRequired = 1
         button.addGestureRecognizer(tap)
         
         insertSubview(button, aboveSubview: self)
+        
+        addConstraints([NSLayoutConstraint(item: button, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0), NSLayoutConstraint(item: button, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0), NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0), NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0)])
     }
     
     override func setupGradient() {

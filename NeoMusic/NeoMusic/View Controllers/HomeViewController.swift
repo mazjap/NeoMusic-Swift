@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     var settingsController = SettingsController.shared
     let gradientLayer = CAGradientLayer()
     var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
-    var nowPlayingView: NowPlayingView = .fromNib()
+    var nowPlayingView: NowPlayingView!
     
     let SpotifyClientID = "e5e6a8a7bca44bc1a12a5d0fa9af1235"
     let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
@@ -59,12 +59,11 @@ class HomeViewController: UIViewController {
     }
     
     private func setup() {
-        let guide = view.layoutMarginsGuide
+        let safeAreaInsets = view.safeAreaInsets
+        let safeAreaFrame = CGRect(x: safeAreaInsets.left, y: safeAreaInsets.top, width: view.frame.width - safeAreaInsets.left - safeAreaInsets.right, height: view.frame.height - safeAreaInsets.top - safeAreaInsets.bottom)
+        nowPlayingView = NowPlayingView(frame: safeAreaFrame)
+        
         view.addSubview(nowPlayingView)
-        nowPlayingView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        nowPlayingView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        nowPlayingView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
-        nowPlayingView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         
         view.layer.insertSublayer(gradientLayer, at: 0)

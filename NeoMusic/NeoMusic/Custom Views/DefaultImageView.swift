@@ -12,7 +12,7 @@ class DefaultImageView: DefaultView {
     
     // MARK: - Variables
     
-    var rotation: CGFloat = 0
+    private var rotation: CGFloat = 0
     private let rotateAnimation = CABasicAnimation()
     private var totalRotation: CGFloat = 0
     private var prevRotation: CGFloat = 0
@@ -29,14 +29,13 @@ class DefaultImageView: DefaultView {
         updateViews()
     }
     
-    // MARK: - Superclass Functions
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        imageView.frame = rect.changeSize(mult: 0.96)
-        imageView.layer.cornerRadius = frame.height / 2 - frame.height * 0.025
+        updateViews()
     }
+    
+    // MARK: - Superclass Functions
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -44,15 +43,16 @@ class DefaultImageView: DefaultView {
 
     override func updateViews() {
         super.updateViews()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.isUserInteractionEnabled = true
-        imageView.isMultipleTouchEnabled = true
-        
-        let rotationGesture = UIPanGestureRecognizer(target: self, action: #selector(handleRotation))
-        imageView.addGestureRecognizer(rotationGesture)
+        imageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleRotation)))
         
         insertSubview(imageView, aboveSubview: self)
-        imageView.frame = bounds.changeSize(mult: 0.96)
+        
+        
+        addConstraints([NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0), NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0), NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.96, constant: 0), NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.96, constant: 0)])
+        
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = frame.height / 2 - frame.height * 0.025
     }

@@ -11,10 +11,9 @@ import UIKit
 class DefaultView: UIView {
     
     // MARK: - Variables
-    
+    var initialFrame: CGRect
     let shadowView = UIView()
     let backgroundGradient = CAGradientLayer()
-    var secondaryFrame: CGRect
     var colors = [UIColor.bottomGradientColor.cgColor, UIColor.topGradientColor.cgColor] {
         didSet {
             updateGradient()
@@ -33,30 +32,31 @@ class DefaultView: UIView {
     // MARK: - Initializers
     
     override init(frame: CGRect) {
-        secondaryFrame = CGRect()
+        initialFrame = frame
         super.init(frame: frame)
         
         updateViews()
     }
     
     required init?(coder: NSCoder) {
-        secondaryFrame = CGRect()
+        initialFrame = CGRect()
         super.init(coder: coder)
-        
+        initialFrame = frame
         updateViews()
     }
     
     // MARK: - Superclass Functions
     
     override func draw(_ rect: CGRect) {
-        shadowView.frame = CGRect(origin: frame.origin, size: rect.size)
-        
         super.draw(rect)
-        // Create path to be drawn in (circle)
-        UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: bounds.width / 2, height: bounds.height / 2)).addClip()
+        
+        shadowView.frame = CGRect(origin: frame.origin, size: rect.size)
 
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.saveGState()
+        
+        // Create path to be drawn in (circle)
+        UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: bounds.width / 2, height: bounds.height / 2)).addClip()
 
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let colorLocations: [CGFloat] = [0.0, 1.0]
@@ -118,8 +118,6 @@ class DefaultView: UIView {
         
         setupGradient()
         backgroundColor = .clear
-        
-        secondaryFrame = bounds.changeSize(const: 5)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
