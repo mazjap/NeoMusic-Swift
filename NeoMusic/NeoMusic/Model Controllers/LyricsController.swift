@@ -14,20 +14,20 @@ class LyricsController {
     let cache = Cache<String, String>()
     
     func getLyrics(for song: Song, completion: @escaping (Result<String, Error>) -> Void) {
-        guard let title = song.title else {
+        guard song.title != Song.noSong.title else {
             completion(.failure(NSError()))
             return
         }
         
-        if let lyrics = cache.fetch(key: title) {
+        if let lyrics = cache.fetch(key: song.title) {
             completion(.success(lyrics))
             return
         }
         
         let url = baseURL.appendingPathComponent("track.search")
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-        if let artist = song.artist, let title = song.title {
-            components.queryItems = [URLQueryItem(name: "q_artist", value: artist), URLQueryItem(name: "q_track", value: title)]
+        if song.artist != Song.noSong.artist && song.title != Song.noSong.title {
+            components.queryItems = [URLQueryItem(name: "q_artist", value: song.artist), URLQueryItem(name: "q_track", value: song.title)]
         }
         
         URLSession.shared.dataTask(with: components.url!) { data, response, error in
@@ -42,7 +42,7 @@ class LyricsController {
             }
             
             if let lyrics = String(data: data, encoding: .utf8) {
-                self.cache.store(value: title, for: lyrics)
+                self.cache.store(value: song.title, for: lyrics)
                 completion(.success(lyrics))
             } else {
                 

@@ -28,8 +28,9 @@ class SettingsController {
             return fetchAppleMusicStatus()
         case .spotify:
             return fetchSpotifyStatus()
-        @unknown default:
-            fatalError("Selection is invalid or isn't supported. THIS IS A BUG! Please report it if found.")
+        default:
+            NSLog("Selection is invalid or isn't supported")
+            return false
         }
     }
     
