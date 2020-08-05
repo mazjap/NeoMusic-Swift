@@ -11,12 +11,10 @@ import StoreKit
 
 class HomeViewController: UIViewController {
     var list = [SongCategory]()
-    var musicPlayer: AppleMusicPlayer?
     var settingsController = SettingsController.shared
     let gradientLayer = CAGradientLayer()
     var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
     var nowPlayingView: NowPlayingView!
-    
     let SpotifyClientID = "e5e6a8a7bca44bc1a12a5d0fa9af1235"
     let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
     lazy var configuration = SPTConfiguration(
@@ -26,7 +24,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak private var songSectionStackView: UIStackView!
     @IBOutlet weak private var stackViewHeightAnchor: NSLayoutConstraint!
-    @IBOutlet weak var musicServiceCollectionView: UICollectionView!
+    @IBOutlet weak private var musicServiceCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +33,12 @@ class HomeViewController: UIViewController {
         musicServiceCollectionView.delegate = self
         musicServiceCollectionView.dataSource = self
         
-        musicServiceCollectionView.register(UINib(nibName: "DefaultServiceCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MusicServiceCell")
+        musicServiceCollectionView.register(DefaultServiceCollectionViewCell.self, forCellWithReuseIdentifier: DefaultServiceCollectionViewCell.identifier)
         
-        if settingsController.status(of: .appleMusic) {
-            self.musicPlayer = AppleMusicPlayer()
-            nowPlayingView.musicPlayer = musicPlayer
+        for service in SongType.allCases {
+            if settingsController.status(of: service) {
+                nowPlayingView.setupService(service)
+            }
         }
     }
     
@@ -74,14 +73,22 @@ class HomeViewController: UIViewController {
         gradientLayer.colors = colors
         gradientLayer.frame = self.view.bounds
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        nowPlayingView.musicPlayer = musicPlayer
-        nowPlayingView.settingsController = settingsController
+    
+    private func serviceConnected(type: SongType) {
+        switch type {
+        case .appleMusic:
+            connectAppleMusic()
+        case .spotify:
+            connectSpotify()
+        default:
+            let alert = UIAlertController(title: "An Error Occurred", message: "The button you clicked isn't active. Please try again", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            present(alert, animated: true)
+        }
     }
     
     private func connectSpotify() {
-//        nowPlayingView.toggle()
+        
     }
     
     private func connectAppleMusic() {
@@ -92,14 +99,14 @@ class HomeViewController: UIViewController {
                     self.settingsController.setAppleMusicStatus(false)
                 case .authorized:
                     self.settingsController.setAppleMusicStatus(true)
-                    self.musicPlayer = AppleMusicPlayer()
+                    self.nowPlayingView.setupService(.appleMusic)
                 default:
                     break
                 }
             }
         } else if SKCloudServiceController.authorizationStatus() == .authorized {
-            self.settingsController.setAppleMusicStatus(true)
-            self.musicPlayer = AppleMusicPlayer()
+            settingsController.setAppleMusicStatus(true)
+            nowPlayingView.setupService(.appleMusic)
         } else {
             let alert = UIAlertController(title: "User Action Required", message: "Unable to authorize Apple Music usage. Please open settings and allow access.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
@@ -123,14 +130,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicServiceCell", for: indexPath) as? DefaultServiceCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultServiceCollectionViewCell.identifier, for: indexPath) as? DefaultServiceCollectionViewCell else { return UICollectionViewCell() }
         let type = getSections()[indexPath.row]
         cell.type = type
         cell.setup()
         
-        cell.delegate = self
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let type = (collectionView.cellForItem(at: indexPath) as? DefaultServiceCollectionViewCell)?.type else { return }
+        serviceConnected(type: type)
     }
     
     private func getSections() -> [SongType] {
@@ -153,21 +163,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension HomeViewController: SongOptionDelegate {
     func buttonWasTapped(type: SongCategory) {
         nowPlayingView.isOpen = true
-        musicPlayer?.setSongList(type)
-    }
-}
-
-extension HomeViewController: DefaultServiceCollectionViewCellDelegate {
-    func serviceConnected(type: SongType) {
-        switch type {
-        case .appleMusic:
-            connectAppleMusic()
-        case .spotify:
-            connectSpotify()
-        @unknown default:
-            let alert = UIAlertController(title: "An Error Occurred", message: "The button you clicked isn't active. Please try again", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default))
-            present(alert, animated: true)
-        }
+        nowPlayingView.musicPlayer.setSongList(type)
     }
 }

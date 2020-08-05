@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="chs-0D-j2J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17140" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="chs-0D-j2J">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17115"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,7 +31,7 @@
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7ZI-cQ-A4P">
                                 <rect key="frame" x="0.0" y="413" width="414" height="64"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="n4O-EQ-MIi"/>
                                 </constraints>
@@ -51,7 +53,8 @@
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="c6a-nd-888"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="c6a-nd-888" firstAttribute="trailing" secondItem="7ZI-cQ-A4P" secondAttribute="trailing" id="EgS-sj-8B7"/>
                             <constraint firstItem="7ZI-cQ-A4P" firstAttribute="top" secondItem="MCe-A4-fVZ" secondAttribute="bottom" constant="32" id="IhT-Vi-sio"/>
@@ -62,7 +65,6 @@
                             <constraint firstItem="DKS-kn-afD" firstAttribute="leading" secondItem="MCe-A4-fVZ" secondAttribute="leading" id="jdc-uD-ibs"/>
                             <constraint firstItem="7ZI-cQ-A4P" firstAttribute="leading" secondItem="c6a-nd-888" secondAttribute="leading" id="uw5-sa-hgY"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="c6a-nd-888"/>
                     </view>
                     <navigationItem key="navigationItem" id="TZR-MM-iGj"/>
                     <connections>
@@ -93,4 +95,9 @@
             <point key="canvasLocation" x="82.608695652173921" y="79.6875"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

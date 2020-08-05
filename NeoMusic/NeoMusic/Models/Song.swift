@@ -8,72 +8,53 @@
 
 import UIKit
 import MediaPlayer
+import WidgetKit
 
-struct Song {
-    let artist: String?
-    let artwork: UIImage?
-    let title: String?
+struct Song: TimelineEntry, Identifiable, Equatable {
+    var date: Date {
+        Date()
+    }
+    
+    let artist: String
+    let artwork: UIImage
+    let title: String
     var lyrics: Lyrics?
     let duration: TimeInterval
-    let media: MPMediaItem
+    let media: MPMediaItem?
+    var isFavorite: Bool?
     var isExplicit: Bool
     
-    init?(song: Any) {
+    var id: String {
+        "\(artist) - \(title)\(isExplicit ? " - Explicit" : "")"
+    }
+    
+    init(song: Any?) {
+        let defaultImage = UIImage.placeholder
+        let defaultArtist = "Artist"
+        let defaultTitle = "No Song Selected"
+        
         if let song = song as? MPMediaItem {
-            artist = song.artist
-            artwork = song.artwork?.image(at: CGSize(width: 500, height: 500))
-            title = song.title
+            artist = song.artist ?? defaultArtist
+            artwork = song.artwork?.image(at: CGSize(width: 500, height: 500)) ?? defaultImage
+            title = song.title ?? defaultTitle
             duration = song.playbackDuration
             isExplicit = song.isExplicitItem
             media = song
             lyrics = Lyrics(text: song.lyrics)
-        } else if let song = song as? UIView { // TODO: - Change to spotify media item
-            return nil
-        } else {
-            return nil
+        } else { // TODO: - Check for spotify media item
+            artist = defaultArtist
+            artwork = defaultImage
+            title = defaultTitle
+            duration = 0
+            media = nil
+            isExplicit = false
         }
     }
     
-    private init(artist: String?, artwork: UIImage?, title: String?, duration: TimeInterval?, media: MPMediaItem?, lyrics: Lyrics?, isExplicit: Bool?) {
-        self.artist = artist
-        self.lyrics = lyrics
-        
-        
-        if let artwork = artwork {
-            self.artwork = artwork
-        } else {
-            self.artwork = UIImage(named: "Placeholder")
-        }
-        
-        if let title = title {
-            self.title = title
-        } else {
-            self.title = "No Song Selected"
-        }
-        
-        if let duration = duration {
-            self.duration = duration
-        } else {
-            self.duration = 0.01
-        }
-        
-        if let media = media {
-            self.media = media
-        } else {
-            self.media = MPMediaItem()
-        }
-        
-        if let isExplicit = isExplicit {
-            self.isExplicit = isExplicit
-        } else {
-            self.isExplicit = false
-        }
-    }
-    
-    static var noSong = Song(artist: nil, artwork: nil, title: nil, duration: nil, media: nil, lyrics: nil, isExplicit: nil)
+    static var noSong = Song(song: nil)
 }
 
-struct Lyrics {
+struct Lyrics: Equatable {
     let text: String?
     var hasCheckedAPI = false
     
@@ -97,7 +78,7 @@ enum SongType: String, CaseIterable {
     case spotify = "logo-spotify"
     case appleMusic = "logo-apple-music"
     
-    func name() -> String? {
+    func name() -> String {
         if self == .appleMusic {
             return "Apple Music"
         } else if self == .spotify {
@@ -106,14 +87,4 @@ enum SongType: String, CaseIterable {
         
         return "Unknown"
     }
-}
-
-enum yeah {
-    case uno
-    case dos
-    case tres
-}
-
-extension yeah: CaseIterable {
-    
 }
