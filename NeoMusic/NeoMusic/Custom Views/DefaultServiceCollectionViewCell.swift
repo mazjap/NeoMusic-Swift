@@ -8,15 +8,11 @@
 
 import UIKit
 
-protocol DefaultServiceCollectionViewCellDelegate: AnyObject {
-    func serviceConnected(type: SongType)
-}
-
 class DefaultServiceCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Variables
     
-    weak var delegate: DefaultServiceCollectionViewCellDelegate?
+    static let identifier = "DefaultServiceCollectionViewCell"
     
     var jiggler: UIImpactFeedbackGenerator?
     var type: SongType? {
@@ -27,26 +23,37 @@ class DefaultServiceCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // MARK: - IBOutlets
-    
-    @IBOutlet private weak var connectServiceButton: UIButton!
+    private var imageView: UIImageView
     
     // MARK: - Superclass Functions
-
+    
+    override init(frame: CGRect) {
+        imageView = UIImageView(frame: frame)
+        super.init(frame: frame)
+        
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        self.imageView = UIImageView()
+        super.init(coder: coder)
+        
+        imageView.frame = bounds
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
     }
     
     // MARK: - Functions
     func setup() {
-        connectServiceButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-        connectServiceButton.imageView?.contentMode = .scaleAspectFit
-        connectServiceButton.contentMode = .scaleAspectFit
-        backgroundColor = .clear
+        addSubview(imageView)
+        
+        imageView.contentMode = .scaleAspectFit
     }
     
     private func setImage(_ image: UIImage?) {
-        connectServiceButton.setImage(image, for: .normal)
+        imageView.image = image
     }
 
     // MARK: - Private Functions
@@ -54,25 +61,5 @@ class DefaultServiceCollectionViewCell: UICollectionViewCell {
     private func tap() {
         guard let jiggler = jiggler else { return }
         jiggler.impactOccurred()
-    }
-    
-    // MARK: - Objective-C Functions
-    
-    @objc
-    private func buttonTapped(_ sender: UIButton) {
-        guard let type = type else { return }
-        
-        delegate?.serviceConnected(type: type)
-    }
-    
-    
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        guard isUserInteractionEnabled, !isHidden, alpha >= 0.01, self.point(inside: point, with: event) else { return nil }
-        
-        if connectServiceButton.point(inside: convert(point, to: connectServiceButton), with: event) {
-            return connectServiceButton
-        }
-        
-        return super.hitTest(point, with: event)
     }
 }
