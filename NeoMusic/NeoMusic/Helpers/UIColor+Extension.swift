@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIColor {
     static let topGradientColor = UIColor(named: "BackgroundGradientTop")!
@@ -37,5 +38,9 @@ extension UIColor {
         getRed(&red, green: &green, blue: &blue, alpha: &alpha)
 
         return (red * 255, green * 255, blue * 255, alpha * 255)
+    }
+    
+    var color: Color {
+        Color(self)
     }
 }

@@ -20,6 +20,10 @@ extension CGRect {
         self.init(origin: CGPoint(x: center.x - translationX, y: center.y - translationY), size: size)
     }
     
+    init(x: CGFloat, centerY: CGFloat, size: CGSize) {
+        self.init(center: CGPoint(x: x + size.width / 2, y: centerY), size: size)
+    }
+    
     func size(multiplier: CGFloat) -> CGSize {
         return CGSize(width: width * multiplier, height: height * multiplier)
     }
@@ -31,5 +35,9 @@ extension CGRect {
     func changeSize(mult: CGFloat = 1, const: CGFloat = 0) -> CGRect {
         let offset = 1 - ((height - const) / height)
         return CGRect(center: center, size: size(multiplier: mult - offset))
+    }
+    
+    func changeSize(_ newSize: CGSize) -> CGRect {
+        return CGRect(origin: origin, size: newSize)
     }
 }
