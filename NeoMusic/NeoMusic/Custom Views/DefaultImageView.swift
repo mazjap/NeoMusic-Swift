@@ -19,6 +19,10 @@ class DefaultImageView: DefaultView {
     private var startRotationAngle: CGFloat = 0
     private var imageView = UIImageView()
     
+    private var cornerRadius: CGFloat {
+        frame.height / 2 - frame.height * 0.025
+    }
+    
     var jiggler: UIImpactFeedbackGenerator?
     
     // MARK: - Initializers
@@ -39,6 +43,8 @@ class DefaultImageView: DefaultView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        imageView.layer.cornerRadius = cornerRadius
     }
 
     override func updateViews() {
@@ -54,7 +60,6 @@ class DefaultImageView: DefaultView {
         addConstraints([NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0), NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0), NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.96, constant: 0), NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.96, constant: 0)])
         
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = frame.height / 2 - frame.height * 0.025
     }
     
     // MARK: - Functions

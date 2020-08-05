@@ -16,8 +16,10 @@ NeoMusic is a music player designed to connect Spotify, Soundcloud, Apple Music,
 
 ### Features
 
--    Play songs from Apple library
--    Spinnable artwork
+- Play songs from Apple library
+- Spinnable artwork
+- Toggleable music player view
+- iOS 14 Widget
 
 ## Contributors
 
@@ -32,7 +34,7 @@ NeoMusic is a music player designed to connect Spotify, Soundcloud, Apple Music,
 - [ ] Fix dark shadow
 - [ ] Custom background/gradient colors
 - [ ] Add Spotify support
-- [ ] Implement toggleable NowPlayingView
+- [x] Implement toggleable NowPlayingView
 - [ ] Convert Spotify playlist to Apple Music playlist and vice versa
 
 ## Requirements
@@ -46,7 +48,7 @@ When contributing to this repository, please [contact me][wiki-url]
 
 ### Feature Requests
 
-I would love to hear from you about new features which would improve this app and further the aims of the project. Please provide as much detail and information as possible to show us why you think your new feature should be implemented.
+I would love to hear from you about new features which would improve this app and further the aims of the project. Please provide as much detail and information as possible to show why you think your new feature should be implemented.
 
 ### Pull Requests
 
