@@ -20,7 +20,7 @@ class SongOptionView: UIView {
         }
     }
     
-    var sectionTitleButton = EmbeddedButton()
+    var sectionTitleButton = UIButton()
     var rightArrowImageView = UIImageView()
     weak var delegate: SongOptionDelegate?
     

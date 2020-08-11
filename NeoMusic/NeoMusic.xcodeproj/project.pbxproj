@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E04933A2486D04600E66269 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0493392486D04600E66269 /* SettingsController.swift */; };
 		0E04935C24873CE900E66269 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0493462487379700E66269 /* SpotifyiOS.framework */; };
-		0E04AFEE249336FB0008843A /* EmbeddedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04AFED249336FB0008843A /* EmbeddedButton.swift */; };
+		0E04AFEE249336FB0008843A /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04AFED249336FB0008843A /* UIButton+Extension.swift */; };
 		0E09919824D5006600B6CFC4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E755B4624C781E9006990B7 /* WidgetKit.framework */; };
 		0E09919924D5006600B6CFC4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E755B4824C781E9006990B7 /* SwiftUI.framework */; };
 		0E09919C24D5006600B6CFC4 /* NeoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09919B24D5006600B6CFC4 /* NeoWidget.swift */; };
@@ -19,8 +19,10 @@
 		0E0991B524D500F900B6CFC4 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7803D7246C443400EDC824 /* Song.swift */; };
 		0E0991B624D5012100B6CFC4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA630EB24D42ABE008B764B /* UIImage+Extension.swift */; };
 		0E0991B724D5012100B6CFC4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB94A4F2463965500BC6717 /* UIColor+Extension.swift */; };
+		0E0D187224E1A57C00EB641C /* CollectionViewHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D187124E1A57C00EB641C /* CollectionViewHeaderFooter.swift */; };
 		0E17131524D75897001532B8 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0991AB24D500B300B6CFC4 /* PlayerController.swift */; };
 		0E24021824DB420F000D28E6 /* AppleMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E24021724DB420F000D28E6 /* AppleMusicPlayer.swift */; };
+		0E249E0424E09C78008A39C9 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E249E0324E09C78008A39C9 /* UIAlertController+Extension.swift */; };
 		0E2FF779249B0F5800B8B3DD /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FF778249B0F5800B8B3DD /* NowPlayingView.swift */; };
 		0E3007D02478E274006F0394 /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3007CF2478E274006F0394 /* LyricsController.swift */; };
 		0E3007D22478E36F006F0394 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3007D12478E36F006F0394 /* Cache.swift */; };
@@ -37,6 +39,7 @@
 		0E7803D4246C369500EDC824 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7803D3246C369500EDC824 /* DefaultButton.swift */; };
 		0E7803D8246C443400EDC824 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7803D7246C443400EDC824 /* Song.swift */; };
 		0E91D996248DEA2800A3F6F1 /* FloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E91D995248DEA2700A3F6F1 /* FloatingPoint+Extension.swift */; };
+		0E9A298224DCAF6C00FC7B82 /* NeoTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A298124DCAF6C00FC7B82 /* NeoTabBarController.swift */; };
 		0EA630EC24D42ABE008B764B /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA630EB24D42ABE008B764B /* UIImage+Extension.swift */; };
 		0EAA087C2471F85500A0EC73 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAA087B2471F85500A0EC73 /* Queue.swift */; };
 		0EB94A3C2463961100BC6717 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB94A3B2463961100BC6717 /* AppDelegate.swift */; };
@@ -48,7 +51,6 @@
 		0EE2CF55248EFED200B215A6 /* DefaultServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE2CF54248EFED200B215A6 /* DefaultServiceCollectionViewCell.swift */; };
 		0EF6EF5124849635005BCA7F /* DefaultSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6EF5024849635005BCA7F /* DefaultSlider.swift */; };
 		0EF6EF53248499E6005BCA7F /* DefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6EF52248499E6005BCA7F /* DefaultView.swift */; };
-		0EF6EF5524864292005BCA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6EF5424864292005BCA7F /* Main.storyboard */; };
 		0EF6EF59248643D4005BCA7F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6EF58248643D4005BCA7F /* HomeViewController.swift */; };
 		0EF9113E2478903200777358 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9113D2478903200777358 /* TimeInterval+Extension.swift */; };
 		0EFCD671248ED5480085EAA2 /* SongOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCD670248ED5480085EAA2 /* SongOptionView.swift */; };
@@ -82,14 +84,16 @@
 		0E0493392486D04600E66269 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0E0493462487379700E66269 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		0E04935224873A7F00E66269 /* NeoMusic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NeoMusic-Bridging-Header.h"; sourceTree = "<group>"; };
-		0E04AFED249336FB0008843A /* EmbeddedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedButton.swift; sourceTree = "<group>"; };
+		0E04AFED249336FB0008843A /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		0E09919724D5006600B6CFC4 /* NeoWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NeoWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E09919B24D5006600B6CFC4 /* NeoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeoWidget.swift; sourceTree = "<group>"; };
 		0E09919E24D5006800B6CFC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E0991A024D5006800B6CFC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E0991AB24D500B300B6CFC4 /* PlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		0E0991AF24D500DC00B6CFC4 /* CustomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		0E0D187124E1A57C00EB641C /* CollectionViewHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderFooter.swift; sourceTree = "<group>"; };
 		0E24021724DB420F000D28E6 /* AppleMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicPlayer.swift; sourceTree = "<group>"; };
+		0E249E0324E09C78008A39C9 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		0E2FF778249B0F5800B8B3DD /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
 		0E3007CF2478E274006F0394 /* LyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
 		0E3007D12478E36F006F0394 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 		0E7803D3246C369500EDC824 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		0E7803D7246C443400EDC824 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		0E91D995248DEA2700A3F6F1 /* FloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extension.swift"; sourceTree = "<group>"; };
+		0E9A298124DCAF6C00FC7B82 /* NeoTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeoTabBarController.swift; sourceTree = "<group>"; };
 		0EA630EB24D42ABE008B764B /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		0EAA087B2471F85500A0EC73 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		0EB94A382463961100BC6717 /* NeoMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeoMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,7 +126,6 @@
 		0EE2CF54248EFED200B215A6 /* DefaultServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultServiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		0EF6EF5024849635005BCA7F /* DefaultSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSlider.swift; sourceTree = "<group>"; };
 		0EF6EF52248499E6005BCA7F /* DefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultView.swift; sourceTree = "<group>"; };
-		0EF6EF5424864292005BCA7F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0EF6EF58248643D4005BCA7F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0EF9113D2478903200777358 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		0EFCD670248ED5480085EAA2 /* SongOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongOptionView.swift; sourceTree = "<group>"; };
@@ -156,14 +160,6 @@
 				0E755B4824C781E9006990B7 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0E04AFEF249337F40008843A /* Embedded Custom Views */ = {
-			isa = PBXGroup;
-			children = (
-				0E04AFED249336FB0008843A /* EmbeddedButton.swift */,
-			);
-			path = "Embedded Custom Views";
 			sourceTree = "<group>";
 		};
 		0E09919A24D5006600B6CFC4 /* NeoWidget */ = {
@@ -218,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				0EF6EF58248643D4005BCA7F /* HomeViewController.swift */,
+				0E9A298124DCAF6C00FC7B82 /* NeoTabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -254,8 +251,8 @@
 				0EF6EF52248499E6005BCA7F /* DefaultView.swift */,
 				0EFCD670248ED5480085EAA2 /* SongOptionView.swift */,
 				0EE2CF54248EFED200B215A6 /* DefaultServiceCollectionViewCell.swift */,
-				0E04AFEF249337F40008843A /* Embedded Custom Views */,
 				0E4A78B824DAD180001BE5DA /* DefaultLabel.swift */,
+				0E0D187124E1A57C00EB641C /* CollectionViewHeaderFooter.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -263,7 +260,6 @@
 		0E104AF72478831E00C1D0AF /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				0EF6EF5424864292005BCA7F /* Main.storyboard */,
 				0EB94A462463961700BC6717 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -280,6 +276,8 @@
 				0E32B7CF24ADC50600C66EB0 /* Globals and Constants.swift */,
 				0EBF1AC824B45040007774DE /* String+Extension.swift */,
 				0EA630EB24D42ABE008B764B /* UIImage+Extension.swift */,
+				0E249E0324E09C78008A39C9 /* UIAlertController+Extension.swift */,
+				0E04AFED249336FB0008843A /* UIButton+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -420,7 +418,6 @@
 			files = (
 				0EB94A482463961700BC6717 /* LaunchScreen.storyboard in Resources */,
 				0EB94A452463961700BC6717 /* Assets.xcassets in Resources */,
-				0EF6EF5524864292005BCA7F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +447,9 @@
 				0EE2CF55248EFED200B215A6 /* DefaultServiceCollectionViewCell.swift in Sources */,
 				0E6A7CE92478B1EA000C5BC7 /* DefaultImageView.swift in Sources */,
 				0E7803D8246C443400EDC824 /* Song.swift in Sources */,
+				0E9A298224DCAF6C00FC7B82 /* NeoTabBarController.swift in Sources */,
 				0E32B7D024ADC50600C66EB0 /* Globals and Constants.swift in Sources */,
+				0E0D187224E1A57C00EB641C /* CollectionViewHeaderFooter.swift in Sources */,
 				0E323BBB24C7E0D4005D76F8 /* AppleMusicDataController.swift in Sources */,
 				0E755B6224C7A268006990B7 /* MusicPlayer.swift in Sources */,
 				0E3FB15C24D73E5E006821F5 /* Constants.swift in Sources */,
@@ -461,12 +460,13 @@
 				0EAA087C2471F85500A0EC73 /* Queue.swift in Sources */,
 				0EB94A3C2463961100BC6717 /* AppDelegate.swift in Sources */,
 				0EF9113E2478903200777358 /* TimeInterval+Extension.swift in Sources */,
-				0E04AFEE249336FB0008843A /* EmbeddedButton.swift in Sources */,
+				0E04AFEE249336FB0008843A /* UIButton+Extension.swift in Sources */,
 				0E568145248475A100F7A814 /* CGRect+Extension.swift in Sources */,
 				0EB94A3E2463961100BC6717 /* SceneDelegate.swift in Sources */,
 				0EF6EF59248643D4005BCA7F /* HomeViewController.swift in Sources */,
 				0E24021824DB420F000D28E6 /* AppleMusicPlayer.swift in Sources */,
 				0EFCD671248ED5480085EAA2 /* SongOptionView.swift in Sources */,
+				0E249E0424E09C78008A39C9 /* UIAlertController+Extension.swift in Sources */,
 				0E755B6024C79447006990B7 /* MusicPlayerController.swift in Sources */,
 				0EF6EF53248499E6005BCA7F /* DefaultView.swift in Sources */,
 				0E2FF779249B0F5800B8B3DD /* NowPlayingView.swift in Sources */,
@@ -509,6 +509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HFR8F4BT7E;
 				INFOPLIST_FILE = NeoWidget/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -531,6 +532,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HFR8F4BT7E;
 				INFOPLIST_FILE = NeoWidget/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

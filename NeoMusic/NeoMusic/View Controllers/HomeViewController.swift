@@ -14,7 +14,8 @@ class HomeViewController: UIViewController {
     var settingsController = SettingsController.shared
     let gradientLayer = CAGradientLayer()
     var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
-    var nowPlayingView: NowPlayingView!
+    var nowPlayingView: NowPlayingView
+    
     let SpotifyClientID = "e5e6a8a7bca44bc1a12a5d0fa9af1235"
     let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
     lazy var configuration = SPTConfiguration(
@@ -22,18 +23,35 @@ class HomeViewController: UIViewController {
       redirectURL: SpotifyRedirectURL
     )
     
-    @IBOutlet weak private var songSectionStackView: UIStackView!
-    @IBOutlet weak private var stackViewHeightAnchor: NSLayoutConstraint!
-    @IBOutlet weak private var musicServiceCollectionView: UICollectionView!
+    private var titleLabel: UILabel!
+    private var songSelectionStackView: UIStackView!
+    private var stackViewHeightAnchor: NSLayoutConstraint!
+    private var musicServiceCollectionView: UICollectionView!
+    private var buttons = [UIButton]()
+    
+    init(npv: NowPlayingView) {
+        self.nowPlayingView = npv
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        self.nowPlayingView = NowPlayingView()
+        
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setup()
         
         musicServiceCollectionView.delegate = self
         musicServiceCollectionView.dataSource = self
         
         musicServiceCollectionView.register(DefaultServiceCollectionViewCell.self, forCellWithReuseIdentifier: DefaultServiceCollectionViewCell.identifier)
+        musicServiceCollectionView.register(CollectionViewHeaderFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewHeaderFooter.reuseIdentifier)
+        musicServiceCollectionView.register(CollectionViewHeaderFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CollectionViewHeaderFooter.reuseIdentifier)
         
         for service in SongType.allCases {
             if settingsController.status(of: service) {
@@ -59,14 +77,31 @@ class HomeViewController: UIViewController {
     
     private func setup() {
         let safeAreaInsets = view.safeAreaInsets
-        let safeAreaFrame = CGRect(x: safeAreaInsets.left, y: safeAreaInsets.top, width: view.frame.width - safeAreaInsets.left - safeAreaInsets.right, height: view.frame.height - safeAreaInsets.top - safeAreaInsets.bottom)
-        nowPlayingView = NowPlayingView(frame: safeAreaFrame)
         
-        view.addSubview(nowPlayingView)
+        let safeAreaFrame = CGRect(x: safeAreaInsets.left, y: safeAreaInsets.top, width: view.frame.width - safeAreaInsets.left - safeAreaInsets.right, height: view.frame.height - safeAreaInsets.top - safeAreaInsets.bottom - tabBarController?.tabBar.frame)
+        
+        nowPlayingView.frame = safeAreaFrame
+        
+        titleLabel = UILabel(frame: CGRect(x: 20, y: 20, width: view.frame.width - 40, height: 50))
+        songSelectionStackView = UIStackView(frame: CGRect(x: 20, y: titleLabel.frame.maxY + 20, width: view.frame.width - 40, height: safeAreaFrame.height * 0.3))
+        musicServiceCollectionView = UICollectionView(frame: CGRect(x: 0, y: songSelectionStackView.frame.maxY + 20, width: view.frame.width, height: 64), collectionViewLayout: UICollectionViewLayout())
+        
+        view.addSubview(titleLabel)
+        view.addSubview(songSelectionStackView)
+        view.addSubview(musicServiceCollectionView)
+        
+        setupSubviews()
         
         
         view.layer.insertSublayer(gradientLayer, at: 0)
         updateGradient()
+    }
+    
+    private func setupSubviews() {
+        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        
+//        songSelectionStackView.addArrangedSubview()
+        
     }
     
     private func updateGradient() {
@@ -162,7 +197,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController: SongOptionDelegate {
     func buttonWasTapped(type: SongCategory) {
-        nowPlayingView.isOpen = true
         nowPlayingView.musicPlayer.setSongList(type)
     }
 }

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class EmbeddedButton: UIButton {
-    override var isHighlighted: Bool {
+extension UIButton {
+    override open var isHighlighted: Bool {
         didSet {
             backgroundColor = isHighlighted ? UIColor(red: 0, green: 0, blue: 0, alpha: 0.2) : .clear
         }

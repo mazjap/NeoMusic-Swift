@@ -11,9 +11,9 @@ import UIKit
 class DefaultView: UIView {
     
     // MARK: - Variables
-    var initialFrame: CGRect
+    private var initialFrame: CGRect
     let shadowView = UIView()
-    let backgroundGradient = CAGradientLayer()
+    private let backgroundGradient = CAGradientLayer()
     var colors = [UIColor.bottomGradientColor.cgColor, UIColor.topGradientColor.cgColor] {
         didSet {
             updateGradient()
@@ -124,6 +124,13 @@ class DefaultView: UIView {
         super.traitCollectionDidChange(previousTraitCollection)
         
         updateColors()
+    }
+    
+    
+    // MARK: - Public Functions
+    
+    func setInitialFrame() {
+        self.initialFrame = frame
     }
 }
 
