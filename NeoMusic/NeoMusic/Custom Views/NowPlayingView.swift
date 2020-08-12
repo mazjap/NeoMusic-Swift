@@ -15,15 +15,13 @@ class NowPlayingView: UIView {
     private var jiggler = UIImpactFeedbackGenerator(style: .heavy)
     var musicPlayer: MusicPlayerController
     var settingsController = SettingsController.shared
-    
-    private var initialFrame: CGRect
-    
-    private let gradientLayer = CAGradientLayer()
-    private var colors: [CGColor] = [] {
+    var colors: [CGColor] = [] {
         didSet {
             updateGradient()
         }
     }
+    
+    private var initialFrame: CGRect
     private var isOpen = true {
         didSet {
             animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
@@ -55,6 +53,8 @@ class NowPlayingView: UIView {
     private var skipBackButton: DefaultButton!
     private var skipForwardButton: DefaultButton!
     private var pausePlayButton: DefaultButton!
+    
+    private let gradientLayer = CAGradientLayer()
     
     private var subs = [UIView]()
     private var btns = [DefaultButton]()
@@ -226,9 +226,11 @@ class NowPlayingView: UIView {
         gradientLayer.colors = colors
         gradientLayer.frame = bounds
         
+        let buttonColors = settingsController.buttonGradient
+        
         for view in subs {
             if let deview = view as? DefaultView {
-                deview.colors = colors
+                deview.colors = [buttonColors.0.cgColor, buttonColors.1.cgColor]
             }
         }
         

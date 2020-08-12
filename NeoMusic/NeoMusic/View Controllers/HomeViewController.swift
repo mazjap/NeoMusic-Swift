@@ -13,8 +13,12 @@ class HomeViewController: UIViewController {
     var list = [SongCategory]()
     var settingsController = SettingsController.shared
     let gradientLayer = CAGradientLayer()
-    var colors = [UIColor.topGradientColor.cgColor, UIColor.bottomGradientColor.cgColor]
-    var nowPlayingView: NowPlayingView
+    var colors: [CGColor] = [] {
+        didSet {
+            nowPlayingView.colors = colors
+        }
+    }
+    var nowPlayingView: NowPlayingView!
     
     let SpotifyClientID = "e5e6a8a7bca44bc1a12a5d0fa9af1235"
     let SpotifyRedirectURL = URL(string: "spotify-ios-quick-start://spotify-login-callback")!
@@ -28,18 +32,6 @@ class HomeViewController: UIViewController {
     private var stackViewHeightAnchor: NSLayoutConstraint!
     private var musicServiceCollectionView: UICollectionView!
     private var buttons = [UIButton]()
-    
-    init(npv: NowPlayingView) {
-        self.nowPlayingView = npv
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        self.nowPlayingView = NowPlayingView()
-        
-        super.init(coder: coder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +52,12 @@ class HomeViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateViews()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -78,9 +76,7 @@ class HomeViewController: UIViewController {
     private func setup() {
         let safeAreaInsets = view.safeAreaInsets
         
-        let safeAreaFrame = CGRect(x: safeAreaInsets.left, y: safeAreaInsets.top, width: view.frame.width - safeAreaInsets.left - safeAreaInsets.right, height: view.frame.height - safeAreaInsets.top - safeAreaInsets.bottom - tabBarController?.tabBar.frame)
-        
-        nowPlayingView.frame = safeAreaFrame
+        let safeAreaFrame = CGRect(x: safeAreaInsets.left, y: safeAreaInsets.top, width: view.frame.width - safeAreaInsets.left - safeAreaInsets.right, height: view.frame.height - safeAreaInsets.top - safeAreaInsets.bottom)
         
         titleLabel = UILabel(frame: CGRect(x: 20, y: 20, width: view.frame.width - 40, height: 50))
         songSelectionStackView = UIStackView(frame: CGRect(x: 20, y: titleLabel.frame.maxY + 20, width: view.frame.width - 40, height: safeAreaFrame.height * 0.3))
@@ -95,6 +91,12 @@ class HomeViewController: UIViewController {
         
         view.layer.insertSublayer(gradientLayer, at: 0)
         updateGradient()
+    }
+    
+    private func updateViews() {
+        let gradient = settingsController.backgroundGradient
+        
+        colors = [gradient.0.cgColor, gradient.1.cgColor]
     }
     
     private func setupSubviews() {

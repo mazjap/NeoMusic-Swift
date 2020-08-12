@@ -15,10 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        SettingsController.shared.setAngle(0)
-    }
 
     // MARK: UISceneSession Lifecycle
 
