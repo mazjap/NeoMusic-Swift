@@ -15,7 +15,7 @@ class NeoTabBarController: UITabBarController {
         let homevc = HomeViewController()
         homevc.tabBarItem.image = UIImage(systemName: "play.circle")
         
-        setViewControllers([homevc], animated: true)
+        setViewControllers([homevc], animated: false)
         
         let safeAreaInsets = view.safeAreaInsets
         

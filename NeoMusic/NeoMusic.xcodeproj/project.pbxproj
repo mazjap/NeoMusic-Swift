@@ -26,7 +26,6 @@
 		0E2FF779249B0F5800B8B3DD /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FF778249B0F5800B8B3DD /* NowPlayingView.swift */; };
 		0E3007D02478E274006F0394 /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3007CF2478E274006F0394 /* LyricsController.swift */; };
 		0E3007D22478E36F006F0394 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3007D12478E36F006F0394 /* Cache.swift */; };
-		0E323BBB24C7E0D4005D76F8 /* AppleMusicDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E323BBA24C7E0D4005D76F8 /* AppleMusicDataController.swift */; };
 		0E323BBD24C7E46B005D76F8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E323BBC24C7E46B005D76F8 /* NetworkError.swift */; };
 		0E32B7D024ADC50600C66EB0 /* Globals and Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E32B7CF24ADC50600C66EB0 /* Globals and Constants.swift */; };
 		0E3FB15C24D73E5E006821F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3FB15B24D73E5E006821F5 /* Constants.swift */; };
@@ -97,7 +96,6 @@
 		0E2FF778249B0F5800B8B3DD /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
 		0E3007CF2478E274006F0394 /* LyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
 		0E3007D12478E36F006F0394 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		0E323BBA24C7E0D4005D76F8 /* AppleMusicDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicDataController.swift; sourceTree = "<group>"; };
 		0E323BBC24C7E46B005D76F8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		0E32B7CF24ADC50600C66EB0 /* Globals and Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Globals and Constants.swift"; sourceTree = "<group>"; };
 		0E3FB15B24D73E5E006821F5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 				0E3007CF2478E274006F0394 /* LyricsController.swift */,
 				0E3007D12478E36F006F0394 /* Cache.swift */,
 				0E0493392486D04600E66269 /* SettingsController.swift */,
-				0E323BBA24C7E0D4005D76F8 /* AppleMusicDataController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -450,7 +447,6 @@
 				0E9A298224DCAF6C00FC7B82 /* NeoTabBarController.swift in Sources */,
 				0E32B7D024ADC50600C66EB0 /* Globals and Constants.swift in Sources */,
 				0E0D187224E1A57C00EB641C /* CollectionViewHeaderFooter.swift in Sources */,
-				0E323BBB24C7E0D4005D76F8 /* AppleMusicDataController.swift in Sources */,
 				0E755B6224C7A268006990B7 /* MusicPlayer.swift in Sources */,
 				0E3FB15C24D73E5E006821F5 /* Constants.swift in Sources */,
 				0E04933A2486D04600E66269 /* SettingsController.swift in Sources */,

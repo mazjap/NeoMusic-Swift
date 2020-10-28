@@ -18,22 +18,21 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    typealias Entry = PlayerController
-    
-    func placeholder(in context: Context) -> PlayerController {
-        PlayerController()
-    }
-    
-    func snapshot(with context: Context, completion: @escaping (Entry) -> ()) {
-        // Player Configuration
+    func getSnapshot(in context: Context, completion: @escaping (PlayerController) -> Void) {
         let player = Entry()
         
         
         completion(player)
     }
-
-    public func timeline(with context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<PlayerController>) -> Void) {
         completion(Timeline(entries: [Entry(date: Date())], policy: .atEnd))
+    }
+    
+    typealias Entry = PlayerController
+    
+    func placeholder(in context: Context) -> PlayerController {
+        PlayerController()
     }
 }
 

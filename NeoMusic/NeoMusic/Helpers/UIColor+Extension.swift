@@ -40,7 +40,47 @@ extension UIColor {
         return (red * 255, green * 255, blue * 255, alpha * 255)
     }
     
+    var hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        
+        getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        
+        return (h, s, b, a)
+    }
+    
     var color: Color {
         Color(self)
+    }
+    
+    // Credit to Darel Rex Finley: http://alienryderflex.com/hsp.html
+    var perceivedBrightness: CGFloat {
+        let vals = rgba
+        
+        // brightness = sqrt(r^2 * 0.299 + g^2 * 0.587 + b^2 * 0.114)
+        return sqrt(vals.red * vals.red * 0.299 + vals.green * vals.green * 0.587 + vals.blue * vals.blue * 0.114)
+    }
+    
+    func average(to color: UIColor, at percent: CGFloat = 0.5) -> UIColor {
+        let c1 = hsba
+        let c2 = color.hsba
+        
+        let hue = percent * c1.hue + (1 - percent) * c2.hue
+        let saturation = percent * c1.saturation + (1 - percent) * c2.saturation
+        let brightness = percent * c1.brightness + (1 - percent) * c2.brightness
+        let alpha = percent * c1.alpha + (1 - percent) * c2.alpha
+        
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+    }
+    
+    var offsetColors: [UIColor] {
+        let vals = hsba
+        
+        return [
+            UIColor(hue: vals.hue, saturation: vals.saturation, brightness: max(0, vals.brightness - 0.1), alpha: vals.alpha),
+            UIColor(hue: vals.hue, saturation: vals.saturation, brightness: min(1, vals.brightness + 0.1), alpha: vals.alpha)
+        ]
     }
 }
